@@ -21,7 +21,7 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
             </div>
         </div>
-        <div class="text-3xl font-bold pixel-font">1</div>
+        <div class="text-3xl font-bold pixel-font">{{ $projects->count() }}</div>
     </div>
     
     <div class="gb-card p-5 relative overflow-hidden group">
@@ -32,18 +32,7 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
         </div>
-        <div class="text-3xl font-bold pixel-font">0</div>
-    </div>
-    
-    <div class="gb-card p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-[#92ffcb] opacity-5 rounded-bl-full transform group-hover:scale-110 transition-transform"></div>
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-[#aaa4bc] font-semibold text-sm">Tickets de Suporte</h3>
-            <div class="w-8 h-8 rounded bg-[#92ffcb]/20 flex items-center justify-center text-[#92ffcb]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            </div>
-        </div>
-        <div class="text-3xl font-bold pixel-font">0</div>
+        <div class="text-3xl font-bold pixel-font {{ $pendingPayments > 0 ? 'text-[#ff7893]' : '' }}">{{ $pendingPayments }}</div>
     </div>
 </div>
 
@@ -53,33 +42,52 @@
         <h2 class="text-lg md:text-xl font-bold">Projeto Atual</h2>
         <a href="#" class="text-sm font-bold text-[#7f77dd] hover:text-white transition-colors">Ver todos</a>
     </div>
-    
+
+    @php $latest = $projects->first() @endphp
+
+    @if($latest)
     <div class="gb-card p-6 border-l-4 border-l-[#7f77dd]">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
                 <div class="flex items-center gap-3 mb-2">
                     <span class="px-2 py-1 rounded bg-[#7f77dd]/20 text-[#d9d5ff] text-[10px] font-black uppercase tracking-wider">
-                        Em Desenvolvimento
+                        {{ ucfirst(str_replace('_', ' ', $latest->status)) }}
                     </span>
-                    <span class="text-xs font-semibold text-[#aaa4bc]">Atualizado há 2 dias</span>
+                    <span class="text-xs font-semibold text-[#aaa4bc]">Atualizado {{ $latest->updated_at->diffForHumans() }}</span>
                 </div>
-                <h3 class="text-xl md:text-2xl font-bold text-white mb-1">Guilda Custom - Barbearia</h3>
-                <p class="text-sm text-[#aaa4bc]">Sistema de agendamento online e painel de gestão de comissões.</p>
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-1">{{ $latest->agreed_package_name }}</h3>
+                <p class="text-sm text-[#aaa4bc]">Valor acordado: <strong class="text-[#92ffcb]">R$ {{ number_format($latest->agreed_final_value, 2, ',', '.') }}</strong></p>
             </div>
             <div class="flex md:flex-col items-center md:items-end gap-3 w-full md:w-auto">
                 <div class="flex-1 md:w-48">
                     <div class="flex justify-between text-xs font-bold mb-1">
-                        <span class="text-[#92ffcb]">Progresso</span>
-                        <span class="text-white">35%</span>
+                        <span class="text-[#92ffcb]">Status</span>
+                        <span class="text-white">{{ $latest->status }}</span>
                     </div>
                     <div class="w-full h-2 bg-[#101018] rounded-full overflow-hidden border border-[#26215c]">
-                        <div class="h-full bg-gradient-to-r from-[#7f77dd] to-[#92ffcb] rounded-full" style="width: 35%"></div>
+                        @php
+                            $statusProgress = [
+                                'received' => 10, 'in_analysis' => 20, 'proposal_sent' => 30,
+                                'awaiting_approval' => 40, 'in_development' => 65,
+                                'delivered' => 90, 'maintenance' => 100,
+                            ];
+                            $progress = $statusProgress[$latest->status] ?? 0;
+                        @endphp
+                        <div class="h-full bg-gradient-to-r from-[#7f77dd] to-[#92ffcb] rounded-full" style="width: {{ $progress }}%"></div>
                     </div>
                 </div>
                 <a href="#" class="gb-btn-primary px-4 py-2 text-sm whitespace-nowrap">Ver Detalhes</a>
             </div>
         </div>
     </div>
+    @else
+    <div class="gb-card p-8 text-center border-dashed border-[#26215c]">
+        <div class="text-4xl mb-3">🚀</div>
+        <h3 class="text-lg font-bold mb-2">Nenhum projeto ainda</h3>
+        <p class="text-[#aaa4bc] text-sm mb-4">Faça seu primeiro pedido e comece a transformar seu negócio.</p>
+        <a href="#" class="gb-btn-primary inline-block px-6 py-2 text-sm">Fazer Primeiro Pedido</a>
+    </div>
+    @endif
 </div>
 
 <!-- Seção: Ações Rápidas (Aparece mais no Desktop) -->

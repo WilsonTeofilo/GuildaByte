@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(ClientBusiness::class, 'client_id');
     }
+
+    public function projects()
+    {
+        return $this->hasMany(\App\Models\Project::class, 'client_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(\App\Models\Payment::class, 'client_id');
+    }
+
+    public function supportTickets()
+    {
+        return $this->hasMany(\App\Models\SupportTicket::class, 'client_id');
+    }
 }

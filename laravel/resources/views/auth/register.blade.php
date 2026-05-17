@@ -36,11 +36,14 @@
           </a>
         </div>
 
-        @if(isset($selectedPlan))
-        <div class="selected-plan" style="margin-top: 0; margin-bottom: 24px; text-align: center;">
-          <span style="color: var(--gb-green); font-size: 12px; font-weight: 800; text-transform: uppercase;">Plano Selecionado</span>
-          <strong style="font-family: 'Pixelify Sans', Inter, sans-serif; font-size: 24px; color: var(--gb-text);">{{ $selectedPlan['title'] }}</strong>
-          <span style="color: var(--gb-muted); font-size: 14px;">{{ $selectedPlan['price'] }}</span>
+        @if(isset($selectedPlan) && $selectedPlan)
+        <div class="selected-plan" style="margin-top: 0; margin-bottom: 24px; text-align: center; padding: 12px; border: 1px solid #26215c; border-radius: 8px; background: rgba(127,119,221,0.07);">
+          <span style="color: var(--gb-green); font-size: 11px; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">&#9654; Plano Selecionado</span>
+          <strong style="font-family: 'Pixelify Sans', Inter, sans-serif; font-size: 22px; color: var(--gb-text); display: block;">{{ $selectedPlan['title'] }}</strong>
+          <span style="color: var(--gb-green); font-size: 18px; font-weight: 800;">{{ $selectedPlan['price'] }}</span>
+          @if(!empty($selectedPlan['note']))
+            <small style="color: var(--gb-muted); font-size: 11px; display: block; margin-top: 2px;">{{ $selectedPlan['note'] }}</small>
+          @endif
         </div>
         @endif
 
@@ -81,6 +84,9 @@
             <div class="fgrp">
               <label class="flbl" for="name">&#9654; NOME COMPLETO</label>
               <input class="pinp" id="name" name="name" type="text" placeholder="Seu nome completo" autocomplete="name" required value="{{ old('name') }}">
+              @error('name')
+                <span style="color: var(--gb-danger); font-size: 11px; margin-top: 5px; display: block;">{{ $message }}</span>
+              @enderror
             </div>
 
             <div class="fgrp">
