@@ -80,7 +80,7 @@
             <div class="fgrp">
               <label class="flbl" for="name">&#9654; NOME COMPLETO</label>
               <div class="input-wrap">
-                <input class="pinp" id="name" name="name" type="text" placeholder="Seu nome" value="{{ old('name') }}" required minlength="2" maxlength="100">
+                <input class="pinp" id="name" name="name" type="text" placeholder="Seu nome" value="{{ old('name') }}" required minlength="2" maxlength="45">
               </div>
               @error('name')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
@@ -88,7 +88,7 @@
             <div class="fgrp">
               <label class="flbl" for="email">&#9654; EMAIL</label>
               <div class="input-wrap">
-                <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required>
+                <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required maxlength="70">
               </div>
               @error('email')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
@@ -105,7 +105,7 @@
               <div class="fgrp">
                 <label class="flbl" for="pwdInput">&#9654; SENHA</label>
                 <div class="input-wrap">
-                  <input class="pinp" id="pwdInput" name="password" type="password" placeholder="Mín. 8 caracteres" required minlength="8" maxlength="72">
+                  <input class="pinp" id="pwdInput" name="password" type="password" placeholder="Mín. 8 caracteres, maiúsculas e símbolos" required minlength="8" maxlength="30" title="A senha deve ter entre 8 e 30 caracteres, conter letras maiúsculas, minúsculas, números e pelo menos um símbolo (!@#$%)." pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,30}">
                   <button type="button" class="toggle-password" data-toggle-password="#pwdInput" aria-label="Mostrar">S</button>
                 </div>
                 <div class="pwd-strength" id="pwdStrengthBlocks">
@@ -121,7 +121,7 @@
               <div class="fgrp">
                 <label class="flbl" for="confirmPassword">&#9654; CONFIRMAR</label>
                 <div class="input-wrap">
-                  <input class="pinp" id="confirmPassword" name="password_confirmation" type="password" placeholder="Repita a senha" required minlength="8" maxlength="72">
+                  <input class="pinp" id="confirmPassword" name="password_confirmation" type="password" placeholder="Repita a senha" required minlength="8" maxlength="30">
                   <button type="button" class="toggle-password" data-toggle-password="#confirmPassword" aria-label="Mostrar">S</button>
                 </div>
               </div>

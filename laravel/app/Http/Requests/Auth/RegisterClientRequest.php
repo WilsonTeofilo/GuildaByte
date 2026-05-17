@@ -14,9 +14,9 @@ class RegisterClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', 'min:2', 'max:255'],
-            'email'         => ['required', 'email:rfc', 'unique:users,email', 'max:255'],
-            'password'      => ['required', 'min:8', 'confirmed', \Illuminate\Validation\Rules\Password::min(8)->letters()->mixedCase()->numbers()],
+            'name'          => ['required', 'string', 'min:2', 'max:45'],
+            'email'         => ['required', 'email:rfc', 'unique:users,email', 'max:70'],
+            'password'      => ['required', 'min:8', 'max:30', 'confirmed', \Illuminate\Validation\Rules\Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
             'phone'         => ['nullable', 'string', 'max:20', 'regex:/^[\d\+\-\(\) ]{10,20}$/'],
             'business_type' => ['nullable', 'string', 'max:100'],
             'business_name' => ['nullable', 'string', 'max:255'],
@@ -35,6 +35,10 @@ class RegisterClientRequest extends FormRequest
             'password.confirmed'=> 'As senhas não conferem.',
             'password.mixed'    => 'A senha deve conter letras maiúsculas e minúsculas.',
             'password.numbers'  => 'A senha deve conter pelo menos um número.',
+            'password.symbols'  => 'A senha deve conter pelo menos um caractere especial (!@#$%).',
+            'password.max'      => 'A senha não pode ter mais que 30 caracteres.',
+            'name.max'          => 'O nome não pode ter mais que 45 caracteres.',
+            'email.max'         => 'O e-mail não pode ter mais que 70 caracteres.',
             'phone.max'         => 'O telefone não pode ter mais que 20 caracteres.',
             'phone.regex'       => 'O formato do telefone é inválido.',
         ];

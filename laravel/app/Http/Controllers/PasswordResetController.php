@@ -48,14 +48,17 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'token'    => ['required'],
-            'email'    => ['required', 'email:rfc', 'max:255'],
-            'password' => ['required', 'min:8', 'confirmed',
-                           \Illuminate\Validation\Rules\Password::min(8)->letters()->mixedCase()->numbers()],
+            'email'    => ['required', 'email:rfc', 'max:70'],
+            'password' => ['required', 'min:8', 'max:30', 'confirmed',
+                           \Illuminate\Validation\Rules\Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
         ], [
             'password.min'      => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.max'      => 'A senha não pode ter mais que 30 caracteres.',
             'password.confirmed'=> 'As senhas não conferem.',
             'password.mixed'    => 'A senha deve ter maiúsculas e minúsculas.',
             'password.numbers'  => 'A senha deve ter pelo menos um número.',
+            'password.symbols'  => 'A senha deve ter pelo menos um caractere especial (!@#$%).',
+            'email.max'         => 'O e-mail não pode ter mais que 70 caracteres.',
         ]);
 
         $status = Password::reset(

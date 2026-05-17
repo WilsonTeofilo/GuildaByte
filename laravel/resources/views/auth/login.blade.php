@@ -65,7 +65,7 @@
           <div class="fgrp">
             <label class="flbl" for="email">&#9654; EMAIL / LOGIN</label>
             <div class="input-wrap">
-              <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required autofocus>
+              <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required autofocus maxlength="70">
             </div>
             @error('email')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
           </div>
@@ -73,7 +73,7 @@
           <div class="fgrp auth-fgrp-mb">
             <label class="flbl" for="password">&#9654; SENHA</label>
             <div class="input-wrap">
-              <input class="pinp" id="password" name="password" type="password" placeholder="********" required>
+              <input class="pinp" id="password" name="password" type="password" placeholder="********" required maxlength="30">
               <button class="toggle-password" type="button" data-toggle-password="#password" aria-label="Mostrar senha">S</button>
             </div>
             @error('password')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
@@ -86,7 +86,7 @@
           <div class="fgrp" id="otpStep1">
             <label class="flbl" for="otpEmail">&#9654; EMAIL CADASTRADO</label>
             <div class="input-wrap">
-              <input class="pinp" id="otpEmail" type="email" placeholder="seuemail@exemplo.com" required>
+              <input class="pinp" id="otpEmail" type="email" placeholder="seuemail@exemplo.com" required maxlength="70">
             </div>
             <button class="px-btn auth-btn-purple" type="button" id="btnSendOtp">ENVIAR CÓDIGO</button>
           </div>

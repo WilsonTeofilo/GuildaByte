@@ -198,8 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!email?.value.trim() || !emailRx.test(email.value)) {
             showError(email, 'E-mail inválido.'); valid = false;
         }
-        if (!pwd?.value || pwd.value.length < 8) {
-            showError(pwd, 'Senha: mínimo 8 caracteres.'); valid = false;
+        if (!pwd?.value || pwd.value.length < 8 || pwd.value.length > 30) {
+            showError(pwd, 'A senha deve ter entre 8 e 30 caracteres.'); valid = false;
+        } else if (!/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9])/.test(pwd.value)) {
+            showError(pwd, 'A senha deve ter maiúsculas, minúsculas, números e um símbolo (!@#$%).'); valid = false;
         }
         if (pwd?.value && conf?.value && pwd.value !== conf.value) {
             showError(conf, 'As senhas não conferem.'); valid = false;
