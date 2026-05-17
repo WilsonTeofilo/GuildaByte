@@ -12,17 +12,17 @@ class RoleMiddleware
     {
         $user = $request->user();
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('login');
         }
 
         $allowed = match ($role) {
-            'admin'  => $user->isAdmin(),
+            'admin' => $user->isAdmin(),
             'client' => $user->isClient(),
-            default  => false,
+            default => false,
         };
 
-        if (!$allowed) {
+        if (! $allowed) {
             abort(403, 'Acesso negado.');
         }
 

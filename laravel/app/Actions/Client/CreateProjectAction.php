@@ -15,28 +15,38 @@ final class CreateProjectAction
     {
         $packageSlug = $data['pack'] ?? 'core';
         $packageName = strtoupper($packageSlug);
-        
-        $baseValue = match($packageSlug) {
-            'start'  => 1000.00,
-            'core'   => 3000.00,
+
+        $baseValue = match ($packageSlug) {
+            'start' => 1000.00,
+            'core' => 3000.00,
             'custom' => 4000.00,
-            default  => 3000.00,
+            default => 3000.00,
         };
 
+        $featuresList = ! empty($data['features']) ? implode(', ', $data['features']) : 'Nenhum objetivo específico';
+        $fullDescription = sprintf(
+            "%s\n\n**Objetivos:** %s\n**Ref 1:** %s\n**Ref 2:** %s\n**Identidade:** %s",
+            strip_tags($data['desc'] ?? ''),
+            strip_tags($featuresList),
+            strip_tags($data['ref1'] ?? 'N/A'),
+            strip_tags($data['ref2'] ?? 'N/A'),
+            strip_tags($data['has_id'] ?? 'N/A')
+        );
+
         return Project::create([
-            'client_id'              => $client->id,
-            'name'                   => strip_tags($data['name'] ?? 'Novo Projeto'),
-            'description'            => strip_tags($data['desc'] ?? ''),
-            'agreed_package_name'    => $packageName,
+            'client_id' => $client->id,
+            'name' => strip_tags($data['name'] ?? 'Novo Projeto'),
+            'description' => $fullDescription,
+            'agreed_package_name' => $packageName,
             'agreed_package_version' => 1,
-            'agreed_base_value'      => $baseValue,
-            'agreed_discount_value'  => 0.00,
-            'agreed_final_value'     => $baseValue,
+            'agreed_base_value' => $baseValue,
+            'agreed_discount_value' => 0.00,
+            'agreed_final_value' => $baseValue,
             'guildabyte_fee_percent' => 20.00,
-            'guildabyte_fee_value'   => $baseValue * 0.20,
-            'team_net_value'         => $baseValue * 0.80,
-            'status'                 => 'received',
-            'financial_status'       => 'pending',
+            'guildabyte_fee_value' => $baseValue * 0.20,
+            'team_net_value' => $baseValue * 0.80,
+            'status' => 'received',
+            'financial_status' => 'pending',
         ]);
     }
 }

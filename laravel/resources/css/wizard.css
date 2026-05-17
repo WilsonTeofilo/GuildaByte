@@ -220,6 +220,7 @@
   font-size: 1.125rem;
   transition: all 0.1s steps(2);
   box-shadow: inset 4px 4px 0px rgba(0,0,0,0.5);
+  border-radius: 0;
 }
 
 .wiz-inp:focus, .wiz-textarea:focus {

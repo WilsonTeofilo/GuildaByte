@@ -89,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const storeUrl = wizardContainer.dataset.storeUrl;
                 const csrfToken = wizardContainer.dataset.csrf;
                 
+                let features = [];
+                document.querySelectorAll('.feat-item.active').forEach(f => features.push(f.textContent.trim()));
+
                 // Aqui fazemos a req AJAX para Controller Store
                 fetch(storeUrl, {
                     method: 'POST',
@@ -100,6 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         pack: document.getElementById('f_pack').value,
                         name: document.getElementById('f_projName').value,
                         desc: document.getElementById('f_projDesc').value,
+                        features: features,
+                        ref1: document.getElementById('f_ref1').value,
+                        ref2: document.getElementById('f_ref2').value,
+                        has_id: document.getElementById('f_hasId').value,
                     })
                 }).then(res => res.json())
                   .then(data => {

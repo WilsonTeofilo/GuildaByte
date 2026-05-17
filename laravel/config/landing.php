@@ -3,15 +3,15 @@
 return [
     'plans' => [
         'start' => [
-            'name'    => 'Start',
-            'title'   => 'Landing + Vitrine',
-            'label'   => 'Start — Landing + Vitrine',
-            'note'    => 'Presença digital com vitrine e CTA para WhatsApp.',
-            'price'   => 'R$ 1.000',
+            'name' => 'Start',
+            'title' => 'Landing + Vitrine',
+            'label' => 'Start — Landing + Vitrine',
+            'note' => 'Presença digital com vitrine e CTA para WhatsApp.',
+            'price' => 'R$ 1.000',
             'summary' => 'Presença digital com vitrine simples e CTA direto para WhatsApp.',
             'description' => 'Landing page completa com vitrine de produtos e link direto para WhatsApp.',
-            'badge'   => '',
-            'items'   => [
+            'badge' => '',
+            'items' => [
                 'Landing page profissional',
                 'Vitrine de produtos/serviços',
                 'CTA para WhatsApp',
@@ -20,15 +20,15 @@ return [
             ],
         ],
         'core' => [
-            'name'    => 'Core',
-            'title'   => 'Sistema Completo',
-            'label'   => 'Core — Sistema Completo',
-            'note'    => 'Login, painel, pedidos/agendamentos, status e dashboard.',
-            'price'   => 'R$ 3.000',
+            'name' => 'Core',
+            'title' => 'Sistema Completo',
+            'label' => 'Core — Sistema Completo',
+            'note' => 'Login, painel, pedidos/agendamentos, status e dashboard.',
+            'price' => 'R$ 3.000',
             'summary' => 'Sistema completo com login, painel admin, pedidos e dashboard.',
             'description' => 'Sistema com login, painel administrativo, pedidos/agendamentos e dashboard.',
-            'badge'   => 'MAIS PEDIDO',
-            'items'   => [
+            'badge' => 'MAIS PEDIDO',
+            'items' => [
                 'Login e cadastro',
                 'Painel administrativo',
                 'Pedidos ou agendamentos',
@@ -38,15 +38,15 @@ return [
             ],
         ],
         'custom' => [
-            'name'    => 'Custom',
-            'title'   => 'Sistema Personalizado',
-            'label'   => 'Custom — Sistema Personalizado',
-            'note'    => 'Tudo do Core + personalização visual, regras e módulos extras.',
-            'price'   => 'R$ 4.000+',
+            'name' => 'Custom',
+            'title' => 'Sistema Personalizado',
+            'label' => 'Custom — Sistema Personalizado',
+            'note' => 'Tudo do Core + personalização visual, regras e módulos extras.',
+            'price' => 'R$ 4.000+',
             'summary' => 'Sistema sob medida com cores, regras e funcionalidades específicas.',
             'description' => 'Sistema personalizado com design exclusivo e funcionalidades sob medida.',
-            'badge'   => '',
-            'items'   => [
+            'badge' => '',
+            'items' => [
                 'Tudo do pacote Core',
                 'Cores e identidade personalizadas',
                 'Regras específicas do negócio',
@@ -85,24 +85,24 @@ return [
 
     'projects' => [
         'chokko' => [
-            'name'    => 'Chokko Melt',
-            'title'   => 'CHOKKO_MELT.EXE',
+            'name' => 'Chokko Melt',
+            'title' => 'CHOKKO_MELT.EXE',
             'summary' => 'Sistema de pedidos para doceria artesanal com painel admin, cardápio digital e status.',
             'preview' => 'project-preview-chokko',
-            'tags'    => ['PHP', 'Sistema', 'Pedidos', 'Admin'],
-            'slides'  => [
+            'tags' => ['PHP', 'Sistema', 'Pedidos', 'Admin'],
+            'slides' => [
                 ['title' => 'Cardápio digital',       'text' => 'Cliente navega e monta pedido direto pelo celular.'],
                 ['title' => 'Painel administrativo',   'text' => 'Controle de pedidos, status e produção em tempo real.'],
                 ['title' => 'Status para cliente',     'text' => 'O cliente acompanha cada etapa sem precisar perguntar.'],
             ],
         ],
         'ars' => [
-            'name'    => 'ARS Fotografia',
-            'title'   => 'ARS_FOTO.EXE',
+            'name' => 'ARS Fotografia',
+            'title' => 'ARS_FOTO.EXE',
             'summary' => 'Landing page com portfólio, galeria responsiva e CTA para WhatsApp.',
             'preview' => 'project-preview-ars',
-            'tags'    => ['Landing', 'Portfólio', 'Galeria'],
-            'slides'  => [
+            'tags' => ['Landing', 'Portfólio', 'Galeria'],
+            'slides' => [
                 ['title' => 'Portfólio visual',        'text' => 'Galeria responsiva com grid de fotos e preview.'],
                 ['title' => 'Contato direto',          'text' => 'CTA para WhatsApp com mensagem pré-formatada.'],
                 ['title' => 'Mobile first',            'text' => 'Toda a experiência pensada para o celular primeiro.'],

@@ -14,9 +14,9 @@ class VerifyWebhookSignature
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $secret    = config('services.mercadopago.webhook_secret');
+        $secret = config('services.mercadopago.webhook_secret');
         $signature = $request->header('X-Signature', '');
-        $payload   = $request->getContent();
+        $payload = $request->getContent();
 
         // Se não tem secret configurado em produção, bloqueia tudo
         if (app()->isProduction() && empty($secret)) {
@@ -25,7 +25,7 @@ class VerifyWebhookSignature
 
         $expected = hash_hmac('sha256', $payload, $secret);
 
-        if (!hash_equals($expected, $signature)) {
+        if (! hash_equals($expected, $signature)) {
             abort(401, 'Assinatura de webhook inválida.');
         }
 

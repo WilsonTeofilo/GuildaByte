@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         // 1. Criar o Admin Root (O Chefe)
         $adminEmail = 'admin@guildabyte.com';
         $admin = User::where('email', $adminEmail)->first();
-        if (!$admin) {
+        if (! $admin) {
             $adminId = DB::table('users')->insertGetId([
                 'name' => 'Wilson (Root)',
                 'email' => $adminEmail,
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-            
+
             DB::table('employee_profiles')->insert([
                 'user_id' => $adminId,
                 'role_title' => 'CEO / Admin Root',
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         // 2. Criar Cliente de Teste
         $clientEmail = 'cliente@teste.com';
-        if (!User::where('email', $clientEmail)->exists()) {
+        if (! User::where('email', $clientEmail)->exists()) {
             $clientId = DB::table('users')->insertGetId([
                 'name' => 'Cliente de Teste',
                 'email' => $clientEmail,
@@ -70,22 +70,22 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Guilda Start',
                     'base_price' => 1000.00,
                     'deadline' => 15,
-                    'desc' => 'Landing + Vitrine Simples. Ideal para presença digital rápida.'
+                    'desc' => 'Landing + Vitrine Simples. Ideal para presença digital rápida.',
                 ],
                 [
                     'slug' => 'core',
                     'name' => 'Guilda Core',
                     'base_price' => 3000.00,
                     'deadline' => 75, // ~2 meses e meio
-                    'desc' => 'Sistema Completo Básico. Painel, pedidos/agendamentos, status.'
+                    'desc' => 'Sistema Completo Básico. Painel, pedidos/agendamentos, status.',
                 ],
                 [
                     'slug' => 'custom',
                     'name' => 'Guilda Custom',
                     'base_price' => 4000.00,
                     'deadline' => 120, // ~4 meses
-                    'desc' => 'Sistema Personalizado. Cores, regras e módulos exclusivos.'
-                ]
+                    'desc' => 'Sistema Personalizado. Cores, regras e módulos exclusivos.',
+                ],
             ];
 
             foreach ($packages as $pkg) {

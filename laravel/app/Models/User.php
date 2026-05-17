@@ -27,7 +27,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
+            'password' => 'hashed',
         ];
     }
 
@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->hasMany(\App\Models\Project::class, 'client_id');
+        return $this->hasMany(Project::class, 'client_id');
     }
 
     /** Alias semântico para controllers de cliente */
@@ -65,11 +65,11 @@ class User extends Authenticatable
 
     public function payments()
     {
-        return $this->hasMany(\App\Models\Payment::class, 'client_id');
+        return $this->hasMany(Payment::class, 'client_id');
     }
 
     public function supportTickets()
     {
-        return $this->hasMany(\App\Models\SupportTicket::class, 'client_id');
+        return $this->hasMany(SupportTicket::class, 'client_id');
     }
 }

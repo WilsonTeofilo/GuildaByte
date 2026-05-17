@@ -68,14 +68,14 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('projects', fn($t) => $t->dropIndex(['client_id', 'status']));
-        Schema::table('package_versions', fn($t) => $t->dropIndex(['package_id', 'is_current']));
-        Schema::table('support_tickets', fn($t) => $t->dropIndex(['client_id', 'status']));
-        Schema::table('payments', fn($t) => $t->dropIndex(['client_id', 'status']));
-        Schema::table('commissions', fn($t) => $t->dropIndex(['user_id', 'status']));
-        Schema::table('reward_scores', fn($t) => $t->dropIndex(['reward_event_id', 'user_id']));
-        Schema::table('cards', fn($t) => $t->dropIndex(['board_column_id', 'position']));
-        Schema::table('audit_logs', fn($t) => $t->dropIndex(['user_id', 'action']));
-        Schema::table('security_events', fn($t) => $t->dropIndex(['user_id', 'event_type']));
+        Schema::table('projects', fn ($t) => $t->dropIndex(['client_id', 'status']));
+        Schema::table('package_versions', fn ($t) => $t->dropIndex(['package_id', 'is_current']));
+        Schema::table('support_tickets', fn ($t) => $t->dropIndex(['client_id', 'status']));
+        Schema::table('payments', fn ($t) => $t->dropIndex(['client_id', 'status']));
+        Schema::table('commissions', fn ($t) => $t->dropIndex(['user_id', 'status']));
+        Schema::table('reward_scores', fn ($t) => $t->dropIndex(['reward_event_id', 'user_id']));
+        Schema::table('cards', fn ($t) => $t->dropIndex(['board_column_id', 'position']));
+        Schema::table('audit_logs', fn ($t) => $t->dropIndex(['user_id', 'action']));
+        Schema::table('security_events', fn ($t) => $t->dropIndex(['user_id', 'event_type']));
     }
 };

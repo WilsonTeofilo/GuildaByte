@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Project;
 use App\Models\FinancialEvent;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -15,16 +15,16 @@ class ProjectObserver
     public function updating(Project $project): void
     {
         // Só loga se o status mudou
-        if (!$project->isDirty('status')) {
+        if (! $project->isDirty('status')) {
             return;
         }
 
         FinancialEvent::create([
             'project_id' => $project->id,
             'event_type' => 'status_changed',
-            'old_value'  => null,
-            'new_value'  => null,
-            'reason'     => sprintf(
+            'old_value' => null,
+            'new_value' => null,
+            'reason' => sprintf(
                 'Status alterado de "%s" para "%s"',
                 $project->getOriginal('status'),
                 $project->status

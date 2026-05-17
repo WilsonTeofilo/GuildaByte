@@ -16,16 +16,16 @@ class LandingController extends Controller
         $content = $this->content();
 
         return view('landing', [
-            'plans'               => $content['plans'],
-            'features'            => $content['features'],
-            'niches'              => $content['niches'],
-            'timeline'            => $content['timeline'],
-            'projects'            => $content['projects'],
-            'ticker'              => $content['ticker'],
-            'defaultPlan'         => $content['plans']['core'],
-            'supportEmail'        => config('app.support_email', 'guildabyte@gmail.com'),
+            'plans' => $content['plans'],
+            'features' => $content['features'],
+            'niches' => $content['niches'],
+            'timeline' => $content['timeline'],
+            'projects' => $content['projects'],
+            'ticker' => $content['ticker'],
+            'defaultPlan' => $content['plans']['core'],
+            'supportEmail' => config('app.support_email', 'guildabyte@gmail.com'),
             'supportPhoneDisplay' => config('app.support_phone_display', '11 93377-3580'),
-            'whatsappUrl'         => 'https://wa.me/5511933773580',
+            'whatsappUrl' => 'https://wa.me/5511933773580',
         ]);
     }
 

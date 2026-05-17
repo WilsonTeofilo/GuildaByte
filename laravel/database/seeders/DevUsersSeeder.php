@@ -18,6 +18,7 @@ class DevUsersSeeder extends Seeder
         // Só roda em ambiente local — proteção extra
         if (app()->isProduction()) {
             $this->command->error('🚫 DevUsersSeeder bloqueado em produção!');
+
             return;
         }
 
@@ -25,22 +26,22 @@ class DevUsersSeeder extends Seeder
         $client = User::firstOrCreate(
             ['email' => 'cliente@teste.com'],
             [
-                'name'      => 'Cliente Teste',
-                'password'  => Hash::make('cliente123'),
+                'name' => 'Cliente Teste',
+                'password' => Hash::make('cliente123'),
                 'user_type' => 'client',
             ]
         );
         $client->clientProfile()->firstOrCreate(['user_id' => $client->id], [
             'business_name' => 'Empresa Teste LTDA',
-            'phone'         => '11999999999',
+            'phone' => '11999999999',
         ]);
 
         // --- Admin Root de Teste ---
         User::firstOrCreate(
             ['email' => 'admin@teste.com'],
             [
-                'name'      => 'Admin Root Teste',
-                'password'  => Hash::make('admin123'),
+                'name' => 'Admin Root Teste',
+                'password' => Hash::make('admin123'),
                 'user_type' => 'root',
             ]
         );

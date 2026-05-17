@@ -227,7 +227,7 @@ return new class extends Migration
             $table->string('ip_address')->nullable();
             $table->timestamps();
         });
-        
+
         Schema::create('system_settings', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();

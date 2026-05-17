@@ -19,12 +19,12 @@ final class UpdateProfileAction
 
         // Sanitização server-side (NUNCA confiar no front)
         $profile->update([
-            'phone'              => preg_replace('/[^0-9+\-()\s]/', '', $data['phone'] ?? ''),
-            'business_type'      => strip_tags($data['business_type'] ?? ''),
-            'business_name'      => strip_tags($data['business_name'] ?? ''),
-            'instagram'          => strip_tags($data['instagram'] ?? ''),
-            'website'            => filter_var($data['website'] ?? '', FILTER_SANITIZE_URL),
-            'marketing_email'    => (bool) ($data['marketing_email'] ?? false),
+            'phone' => preg_replace('/[^0-9+\-()\s]/', '', $data['phone'] ?? ''),
+            'business_type' => strip_tags($data['business_type'] ?? ''),
+            'business_name' => strip_tags($data['business_name'] ?? ''),
+            'instagram' => strip_tags($data['instagram'] ?? ''),
+            'website' => filter_var($data['website'] ?? '', FILTER_SANITIZE_URL),
+            'marketing_email' => (bool) ($data['marketing_email'] ?? false),
             'marketing_whatsapp' => (bool) ($data['marketing_whatsapp'] ?? false),
         ]);
 

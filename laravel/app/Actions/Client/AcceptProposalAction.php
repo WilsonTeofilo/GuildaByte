@@ -30,12 +30,12 @@ final class AcceptProposalAction
         }
 
         return ContractAcceptance::create([
-            'project_id'       => $project->id,
-            'user_id'          => $user->id,
+            'project_id' => $project->id,
+            'user_id' => $user->id,
             'contract_version' => 1,
-            'ip_address'       => $ip,
-            'user_agent'       => $userAgent,
-            'accepted_at'      => now(),
+            'ip_address' => $ip,
+            'user_agent' => $userAgent,
+            'accepted_at' => now(),
         ]);
     }
 }

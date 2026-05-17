@@ -83,7 +83,7 @@ return new class extends Migration
             $table->foreignId('package_id')->nullable()->constrained('packages')->nullOnDelete();
             $table->foreignId('package_version_id')->nullable()->constrained('package_versions')->nullOnDelete();
             $table->foreignId('promotion_id')->nullable()->constrained('promotions')->nullOnDelete();
-            
+
             // Financial Snapshot (The most important rule of V6)
             $table->string('agreed_package_name');
             $table->integer('agreed_package_version');
@@ -93,18 +93,18 @@ return new class extends Migration
             $table->decimal('guildabyte_fee_percent', 5, 2)->default(20.00);
             $table->decimal('guildabyte_fee_value', 10, 2);
             $table->decimal('team_net_value', 10, 2);
-            
+
             $table->integer('agreed_deadline_days')->nullable();
-            
+
             // Statuses
             $table->string('status')->default('received'); // received, in_analysis, proposal_sent, awaiting_approval, in_development, delivered, maintenance
             $table->string('financial_status')->default('pending'); // pending, paid, late, cancelled
-            
+
             $table->timestamp('accepted_at')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('delivered_at')->nullable();
             $table->timestamp('closed_at')->nullable();
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

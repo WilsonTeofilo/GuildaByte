@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\EncryptedString;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,7 @@ class ClientProfile extends Model
     protected function casts(): array
     {
         return [
-            'phone' => \App\Casts\EncryptedString::class,
+            'phone' => EncryptedString::class,
             // 'instagram' => \App\Casts\EncryptedString::class,
         ];
     }

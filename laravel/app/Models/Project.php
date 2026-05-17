@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ProjectObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,16 +40,16 @@ class Project extends Model
     protected function casts(): array
     {
         return [
-            'agreed_base_value'      => 'decimal:2',
-            'agreed_discount_value'  => 'decimal:2',
-            'agreed_final_value'     => 'decimal:2',
+            'agreed_base_value' => 'decimal:2',
+            'agreed_discount_value' => 'decimal:2',
+            'agreed_final_value' => 'decimal:2',
             'guildabyte_fee_percent' => 'decimal:2',
-            'guildabyte_fee_value'   => 'decimal:2',
-            'team_net_value'         => 'decimal:2',
-            'accepted_at'            => 'datetime',
-            'started_at'             => 'datetime',
-            'delivered_at'           => 'datetime',
-            'closed_at'              => 'datetime',
+            'guildabyte_fee_value' => 'decimal:2',
+            'team_net_value' => 'decimal:2',
+            'accepted_at' => 'datetime',
+            'started_at' => 'datetime',
+            'delivered_at' => 'datetime',
+            'closed_at' => 'datetime',
         ];
     }
 
@@ -86,27 +87,27 @@ class Project extends Model
 
     public function contractAcceptances()
     {
-        return $this->hasMany(\App\Models\ContractAcceptance::class);
+        return $this->hasMany(ContractAcceptance::class);
     }
 
     public function addendums()
     {
-        return $this->hasMany(\App\Models\ScopeAddendum::class);
+        return $this->hasMany(ScopeAddendum::class);
     }
 
     /** Percentual de progresso do projeto baseado no status */
     public function getProgressPercentAttribute(): int
     {
-        return match($this->status) {
-            'received'           => 10,
-            'in_analysis'        => 20,
-            'proposal_sent'      => 30,
-            'awaiting_approval'  => 40,
-            'in_development'     => 65,
-            'in_review'          => 80,
-            'delivered'          => 90,
-            'maintenance'        => 100,
-            default              => 0,
+        return match ($this->status) {
+            'received' => 10,
+            'in_analysis' => 20,
+            'proposal_sent' => 30,
+            'awaiting_approval' => 40,
+            'in_development' => 65,
+            'in_review' => 80,
+            'delivered' => 90,
+            'maintenance' => 100,
+            default => 0,
         };
     }
 
@@ -120,6 +121,6 @@ class Project extends Model
 
     protected static function booted(): void
     {
-        static::observe(\App\Observers\ProjectObserver::class);
+        static::observe(ProjectObserver::class);
     }
 }

@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('google_id')->nullable()->unique()->after('password');
             $table->string('auth_provider')->default('local')->after('google_id')->comment('local, google');
-            
-            // Note: Since only clients can register via Google Auth, 
+
+            // Note: Since only clients can register via Google Auth,
             // the logic will enforce user_type='client' when auth_provider='google' on registration.
             // Employees/Admins must be created internally by Admin Root.
         });

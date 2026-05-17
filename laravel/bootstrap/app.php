@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Middleware\LogFailedLogin;
+use App\Http\Middleware\RoleMiddleware;
+use App\Http\Middleware\SecurityHeaders;
+use App\Http\Middleware\VerifyWebhookSignature;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,14 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'role'    => \App\Http\Middleware\RoleMiddleware::class,
-            'webhook' => \App\Http\Middleware\VerifyWebhookSignature::class,
+            'role' => RoleMiddleware::class,
+            'webhook' => VerifyWebhookSignature::class,
         ]);
 
         // SecurityHeaders em todas as respostas HTTP
-        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+        $middleware->append(SecurityHeaders::class);
         // Log de falha de login em todas as respostas HTTP
-        $middleware->append(\App\Http\Middleware\LogFailedLogin::class);
+        $middleware->append(LogFailedLogin::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

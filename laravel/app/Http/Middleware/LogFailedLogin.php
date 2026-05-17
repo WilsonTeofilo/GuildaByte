@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Models\SecurityEvent;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -27,7 +26,7 @@ class LogFailedLogin
             session('errors')?->has('email')
         ) {
             SecurityEvent::create([
-                'user_id'    => null,
+                'user_id' => null,
                 'event_type' => 'failed_login',
                 'ip_address' => $request->ip(),
             ]);
