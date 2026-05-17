@@ -2,8 +2,8 @@
 
 .auth-logo-wrapper { display: flex; justify-content: center; margin-bottom: 24px; }
 .auth-brand-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.auth-logo-img { border-radius: 8px; border: 1px solid var(--gb-border); }
-.auth-logo-text { color: var(--gb-text); font-family: 'Pixelify Sans', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; }
+.auth-logo-img { width: 60px; height: 60px; border-radius: 8px; border: 1px solid var(--gb-border); object-fit: contain; flex-shrink: 0; }
+.auth-logo-text { color: var(--gb-text); font-family: 'Pixelify Sans', sans-serif; font-size: 34px; font-weight: 700; line-height: 1; }
 .auth-logo-sub { display: block; color: var(--gb-purple-3); }
 
 .auth-alert-success { background: rgba(146,255,203,0.1); border: 1px solid var(--gb-green); color: var(--gb-green); padding: 12px; margin-bottom: 20px; font-size: 12px; font-family: monospace; }

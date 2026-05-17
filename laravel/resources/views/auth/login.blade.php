@@ -38,7 +38,7 @@
       <div class="os-body">
         <div class="auth-logo-wrapper">
           <a class="auth-brand-link" href="{{ route('home') }}">
-            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="48" height="48" class="auth-logo-img">
+            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="60" height="60" class="auth-logo-img">
             <span class="auth-logo-text">Guilda<span class="auth-logo-sub">Byte</span></span>
           </a>
         </div>
