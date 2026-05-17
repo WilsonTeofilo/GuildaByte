@@ -103,7 +103,7 @@
 
         <div class="auth-toggle-box">
             <button type="button" id="toggleAuthMode" class="auth-toggle-btn">
-                [ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]
+                [ Login sem senha (token) ]
             </button>
         </div>
 

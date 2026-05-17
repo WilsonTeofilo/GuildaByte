@@ -46,26 +46,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Tela de Cadastro: Multi-step ──────────────────────────────
     const steps = document.querySelectorAll('.step-panel');
-    if (!steps.length) return; // só roda no register — toggle de senha já foi registrado acima
-
-    const xpFill  = document.getElementById('xpFill');
-    const stepTxt = document.getElementById('stepTxt');
-    const dot1    = document.getElementById('dot1');
-    const dot2    = document.getElementById('dot2');
-
     let current = 0;
 
-    function goTo(index) {
-        steps[current].classList.remove('active');
-        current = index;
-        steps[current].classList.add('active');
-        clearAllErrors();
+    if (steps.length > 0) {
+        const xpFill  = document.getElementById('xpFill');
+        const stepTxt = document.getElementById('stepTxt');
+        const dot1    = document.getElementById('dot1');
+        const dot2    = document.getElementById('dot2');
 
-        if (xpFill)  xpFill.style.width  = current === 0 ? '50%' : '100%';
-        if (stepTxt) stepTxt.textContent  = `STEP ${current + 1} / ${steps.length}`;
-        if (dot1)    dot1.classList.toggle('active', current === 0);
-        if (dot2)    dot2.classList.toggle('active', current === 1);
-    }
+        function goTo(index) {
+            steps[current].classList.remove('active');
+            current = index;
+            steps[current].classList.add('active');
+            clearAllErrors();
+
+            if (xpFill)  xpFill.style.width  = current === 0 ? '50%' : '100%';
+            if (stepTxt) stepTxt.textContent  = `STEP ${current + 1} / ${steps.length}`;
+            if (dot1)    dot1.classList.toggle('active', current === 0);
+            if (dot2)    dot2.classList.toggle('active', current === 1);
+        }
 
     /** Valida Step 1 — APENAS para UX. Backend revalida tudo. */
     function validateStep1() {
@@ -104,17 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return valid;
     }
 
-    document.querySelectorAll('[data-step-next]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (current < steps.length - 1 && validateStep1()) goTo(current + 1);
+        document.querySelectorAll('[data-step-next]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (current < steps.length - 1 && validateStep1()) goTo(current + 1);
+            });
         });
-    });
 
-    document.querySelectorAll('[data-step-prev]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (current > 0) goTo(current - 1);
+        document.querySelectorAll('[data-step-prev]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (current > 0) goTo(current - 1);
+            });
         });
-    });
+    }
 
     // Dupla proteção no submit (server vai revalidar de qualquer forma)
     document.querySelector('[data-auth-form="register"]')?.addEventListener('submit', e => {
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 formDefault.style.display = 'block';
                 formOtp.style.display = 'none';
-                btnToggle.textContent = '[ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]';
+                btnToggle.textContent = '[ Login sem senha (token) ]';
                 btnToggle.style.borderColor = 'var(--gb-purple)';
                 btnToggle.style.color = 'var(--gb-purple-light)';
             }
