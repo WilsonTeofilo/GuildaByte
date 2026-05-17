@@ -15,7 +15,7 @@ class RegisterClientRequest extends FormRequest
     {
         return [
             'name'          => ['required', 'string', 'min:2', 'max:255'],
-            'email'         => ['required', 'email:rfc,dns', 'unique:users,email', 'max:255'],
+            'email'         => ['required', 'email:rfc', 'unique:users,email', 'max:255'],
             'password'      => ['required', 'min:8', 'confirmed'],
             'phone'         => ['nullable', 'string', 'max:20'],
             'business_type' => ['nullable', 'string', 'max:100'],

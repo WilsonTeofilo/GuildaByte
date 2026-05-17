@@ -100,7 +100,7 @@ class AuthController extends Controller
                 'redirect' => $user->isAdmin() ? route('admin.dashboard') : route('client.dashboard')
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['success' => false, 'message' => $e->validator->errors()->first('otp')], 422);
+            return response()->json(['success' => false, 'message' => $e->validator->errors()->first('code') ?: 'Código inválido.'], 422);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Erro ao validar código.'], 500);
         }

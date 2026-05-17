@@ -14,7 +14,7 @@ final class RegisterClient
             $user = User::create([
                 'name'      => strip_tags($data['name']),
                 'email'     => strtolower(trim($data['email'])),
-                'password'  => Hash::make($data['password']),
+                'password'  => $data['password'], // cast 'hashed' no User model faz o Hash::make automaticamente
                 'user_type' => 'client',
             ]);
 

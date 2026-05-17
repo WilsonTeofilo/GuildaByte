@@ -1,16 +1,19 @@
 /**
  * auth.js — Interações das telas de Login e Cadastro
  * Responsável por: multi-step, validação client-side, força da senha, toggle de senha.
+ *
+ * REGRA: front-end valida para UX. Backend SEMPRE revalida. Nunca confiar no front.
  */
 document.addEventListener('DOMContentLoaded', () => {
 
     // ── Toggle mostrar/ocultar senha ──────────────────────────────
+    // NOTA: deve rodar em QUALQUER tela de auth — não pode estar dentro do bloco de steps
     document.querySelectorAll('[data-toggle-password]').forEach(btn => {
         btn.addEventListener('click', () => {
             const input = document.querySelector(btn.dataset.togglePassword);
             if (!input) return;
-            const isHidden = input.type === 'password';
-            input.type     = isHidden ? 'text' : 'password';
+            const isHidden  = input.type === 'password';
+            input.type      = isHidden ? 'text' : 'password';
             btn.textContent = isHidden ? 'O' : 'S';
             btn.setAttribute('aria-label', isHidden ? 'Ocultar senha' : 'Mostrar senha');
         });
@@ -18,8 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Helpers de erro inline ────────────────────────────────────
     function showError(input, message) {
+        if (!input) return;
         clearError(input);
-        const err = document.createElement('span');
+        const err       = document.createElement('span');
         err.className   = 'field-error';
         err.textContent = message;
         err.setAttribute('role', 'alert');
@@ -29,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearError(input) {
+        if (!input) return;
         input.style.borderColor = '';
-        const existing = input.nextElementSibling;
-        if (existing?.classList.contains('field-error')) existing.remove();
+        const next = input.nextElementSibling;
+        if (next?.classList.contains('field-error')) next.remove();
     }
 
     function clearAllErrors() {
@@ -39,14 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.pinp, .pixel-input').forEach(i => i.style.borderColor = '');
     }
 
-    // ── Multi-step cadastro ───────────────────────────────────────
-    const steps   = document.querySelectorAll('.step-panel');
+    // ── Tela de Cadastro: Multi-step ──────────────────────────────
+    const steps = document.querySelectorAll('.step-panel');
+    if (!steps.length) return; // só roda no register — toggle de senha já foi registrado acima
+
     const xpFill  = document.getElementById('xpFill');
     const stepTxt = document.getElementById('stepTxt');
     const dot1    = document.getElementById('dot1');
     const dot2    = document.getElementById('dot2');
-
-    if (!steps.length) return; // não está na tela de cadastro
 
     let current = 0;
 
@@ -56,14 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         steps[current].classList.add('active');
         clearAllErrors();
 
-        const pct = current === 0 ? '50%' : '100%';
-        if (xpFill)  xpFill.style.width  = pct;
+        if (xpFill)  xpFill.style.width  = current === 0 ? '50%' : '100%';
         if (stepTxt) stepTxt.textContent  = `STEP ${current + 1} / ${steps.length}`;
         if (dot1)    dot1.classList.toggle('active', current === 0);
         if (dot2)    dot2.classList.toggle('active', current === 1);
     }
 
-    /** Valida o Step 1 completamente antes de avançar */
+    /** Valida Step 1 — APENAS para UX. Backend revalida tudo. */
     function validateStep1() {
         const name  = document.getElementById('name');
         const email = document.getElementById('email');
@@ -71,24 +75,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const conf  = document.getElementById('confirmPassword');
         let valid   = true;
 
-        if (!name?.value.trim()) {
-            showError(name, 'Informe seu nome completo.');
+        if (!name?.value.trim() || name.value.trim().length < 2) {
+            showError(name, 'Nome obrigatório (mín. 2 caracteres).');
             valid = false;
         }
 
         const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email?.value.trim() || !emailRx.test(email.value)) {
-            showError(email, 'Informe um e-mail válido.');
+            showError(email, 'E-mail inválido.');
             valid = false;
         }
 
-        if ((pwd?.value.length ?? 0) < 8) {
-            showError(pwd, 'A senha deve ter pelo menos 8 caracteres.');
+        if (!pwd?.value || pwd.value.length < 8) {
+            showError(pwd, 'Senha: mínimo 8 caracteres.');
             valid = false;
         }
 
         if (pwd?.value && conf?.value && pwd.value !== conf.value) {
-            showError(conf, 'As senhas não conferem. Verifique e tente novamente.');
+            showError(conf, 'As senhas não conferem.');
+            valid = false;
+        }
+
+        if (!conf?.value) {
+            showError(conf, 'Confirme sua senha.');
             valid = false;
         }
 
@@ -107,52 +116,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Impede submit se as senhas ainda não batem (proteção dupla — server valida de novo)
+    // Dupla proteção no submit (server vai revalidar de qualquer forma)
     document.querySelector('[data-auth-form="register"]')?.addEventListener('submit', e => {
         const pwd  = document.getElementById('pwdInput');
         const conf = document.getElementById('confirmPassword');
         if (pwd?.value !== conf?.value) {
             e.preventDefault();
-            showError(conf, 'As senhas não conferem. Corrija antes de enviar.');
+            showError(conf, 'As senhas não conferem.');
             conf?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
 
     // ── Password strength indicator ───────────────────────────────
-    const pwdInput = document.getElementById('pwdInput');
+    const pwdInput  = document.getElementById('pwdInput');
     const confInput = document.getElementById('confirmPassword');
-    const blocks = [
-        document.getElementById('pb1'),
-        document.getElementById('pb2'),
-        document.getElementById('pb3'),
-        document.getElementById('pb4'),
-    ].filter(Boolean);
+    const blocks    = ['pb1','pb2','pb3','pb4'].map(id => document.getElementById(id)).filter(Boolean);
+    const pwdLabel  = document.getElementById('pwdLabel');
 
     if (pwdInput && blocks.length) {
         pwdInput.addEventListener('input', () => {
-            const v = pwdInput.value;
+            const v     = pwdInput.value;
             const score = [
                 v.length >= 8,
-                /[A-Z]/.test(v),
+                /[A-Z]/.test(v) && /[a-z]/.test(v),
                 /[0-9]/.test(v),
                 /[^A-Za-z0-9]/.test(v),
             ].filter(Boolean).length;
 
+            const colors = ['', '#ff7893', '#f4a261', '#e9c46a', '#92FFCB'];
+            const labels = ['', '[ FRACA ]', '[ MÉDIA ]', '[ FORTE ]', '[ MUITO FORTE ]'];
+
             blocks.forEach((b, i) => {
-                b.classList.toggle('active', i < score);
-                b.style.background = score <= 1 ? '#ff7893'
-                    : score === 2               ? '#f4a261'
-                    : score === 3               ? '#e9c46a'
-                    :                             '#92FFCB';
+                b.style.background = i < score ? colors[score] : '';
             });
 
-            // Limpa erro de confirmação em tempo real se já confere
-            if (confInput?.value && pwdInput.value === confInput.value) {
-                clearError(confInput);
+            if (pwdLabel) {
+                pwdLabel.textContent = v.length > 0 ? labels[score] || labels[1] : '';
+                pwdLabel.style.color = colors[score] || '#ff7893';
             }
+
+            if (confInput?.value && pwdInput.value === confInput.value) clearError(confInput);
         });
 
-        // Valida confirmação em tempo real
         confInput?.addEventListener('input', () => {
             if (confInput.value && pwdInput.value !== confInput.value) {
                 showError(confInput, 'Senhas não conferem.');
