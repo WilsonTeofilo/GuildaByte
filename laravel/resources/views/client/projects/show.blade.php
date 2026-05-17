@@ -10,7 +10,7 @@
 
 <div class="rpg-page-header">
   <h1>{{ $project->name }}</h1>
-  <span class="rpg-status-badge">{{ $project->status->name ?? 'Aguardando' }}</span>
+  <span class="rpg-status-badge">{{ ucfirst(str_replace('_', ' ', $project->status)) }}</span>
 </div>
 
 <div class="rpg-tabs">

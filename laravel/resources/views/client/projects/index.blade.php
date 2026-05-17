@@ -16,29 +16,27 @@
 <div class="rpg-list">
   @forelse($projects as $project)
     @php
-      // Simulação de progresso baseado no status ID
-      // Num caso real, isso pode vir do BD ou logica da fase.
-      $progress = min(100, max(5, ($project->status_id * 10) + 10));
-      $isWaiting = $project->status_id === 1; // 1 = Aguardando
+      $progress = $project->progress_percent;
+      $isWaiting = in_array($project->status, ['received', 'in_analysis']);
     @endphp
     
     <div class="rpg-card">
       <div class="rpg-card-top">
         <h2>{{ $project->name }}</h2>
         <span class="rpg-badge {{ $isWaiting ? 'waiting' : '' }}">
-          {{ $project->status->name ?? 'Aguardando' }}
+          {{ ucfirst(str_replace('_', ' ', $project->status)) }}
         </span>
       </div>
 
       <div class="rpg-progress-container">
         <div class="rpg-progress-bar" style="width: {{ $progress }}%;"></div>
-        <span class="rpg-progress-text">LVL {{ $project->status_id }} - {{ $progress }}% CONCLUIDO</span>
+        <span class="rpg-progress-text">{{ $progress }}% CONCLUÍDO</span>
       </div>
 
       <div class="rpg-card-footer">
         <div class="rpg-info-group">
           <span class="rpg-info-label">Pacote Base:</span>
-          <span class="rpg-info-value">{{ $project->packageVersion->package_id ?? 'Custom' }}</span>
+          <span class="rpg-info-value">{{ $project->agreed_package_name }}</span>
         </div>
         <div class="rpg-info-group">
           <span class="rpg-info-label">Criado em:</span>
