@@ -17,9 +17,9 @@
               <span class="text-xl font-bold text-purple-400">GuildaByte Admin</span>
           </div>
           <nav class="p-4 space-y-2">
-              <a href="#" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Dashboard</a>
-              <a href="#" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Projetos</a>
-              <a href="#" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Clientes</a>
+              <a href="{{ route('admin.dashboard') }}" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Dashboard</a>
+              <a href="javascript:alert('Projetos Admin: em breve');" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Projetos</a>
+              <a href="javascript:alert('Clientes Admin: em breve');" class="block p-2 rounded hover:bg-gray-700 text-gray-300">Clientes</a>
           </nav>
           <div class="p-4 border-t border-gray-700 absolute bottom-0 w-64">
               <form method="POST" action="{{ route('logout') }}">
@@ -37,15 +37,15 @@
           <div class="grid grid-cols-3 gap-6">
               <div class="p-6 bg-gray-800 rounded-lg shadow border border-gray-700">
                   <h3 class="text-gray-400 text-sm font-semibold uppercase">Total Projetos</h3>
-                  <p class="text-4xl font-bold text-white mt-2">12</p>
+                  <p class="text-4xl font-bold text-white mt-2">{{ $totalProjects ?? 0 }}</p>
               </div>
               <div class="p-6 bg-gray-800 rounded-lg shadow border border-gray-700">
-                  <h3 class="text-gray-400 text-sm font-semibold uppercase">Receita Mensal</h3>
-                  <p class="text-4xl font-bold text-white mt-2">R$ 15.000</p>
+                  <h3 class="text-gray-400 text-sm font-semibold uppercase">Receita (Snapshots)</h3>
+                  <p class="text-4xl font-bold text-white mt-2">R$ {{ number_format($totalRevenue ?? 0, 2, ',', '.') }}</p>
               </div>
               <div class="p-6 bg-gray-800 rounded-lg shadow border border-gray-700">
                   <h3 class="text-gray-400 text-sm font-semibold uppercase">Clientes Ativos</h3>
-                  <p class="text-4xl font-bold text-white mt-2">8</p>
+                  <p class="text-4xl font-bold text-white mt-2">{{ $totalClients ?? 0 }}</p>
               </div>
           </div>
       </main>

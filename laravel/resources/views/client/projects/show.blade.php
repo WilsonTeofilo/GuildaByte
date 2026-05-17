@@ -87,6 +87,6 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/projects.js') }}?v=1.0"></script>
+    @vite(['resources/js/projects.js'])
 @endpush
 @endsection

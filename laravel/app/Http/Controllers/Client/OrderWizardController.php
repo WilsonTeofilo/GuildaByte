@@ -29,8 +29,14 @@ class OrderWizardController extends Controller
      */
     public function store(Request $request)
     {
-        // Aqui entra a chamada para a Action (Missão 6.2 - Snapshot Financeiro)
-        // Por agora, vamos apenas simular o retorno de sucesso
+        $validated = $request->validate([
+            'pack' => 'required|string',
+            'name' => 'required|string|max:255',
+            'desc' => 'nullable|string',
+        ]);
+
+        \App\Actions\Client\CreateProjectAction::run($request->user(), $validated);
+
         return response()->json(['success' => true, 'redirect' => route('client.dashboard')]);
     }
 }

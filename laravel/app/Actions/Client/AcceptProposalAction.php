@@ -4,20 +4,19 @@ namespace App\Actions\Client;
 
 use App\Models\ContractAcceptance;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
 /**
  * Registra o aceite digital de uma proposta.
- * NUNCA confia no front: IP e User-Agent são capturados no servidor.
- * Token é imutável após criação.
+ * Recebe IP e UserAgent separadamente.
  */
 final class AcceptProposalAction
 {
-    public static function run(Project $project, Request $request): ContractAcceptance
+    public static function run(Project $project, User $user, string $ip, string $userAgent): ContractAcceptance
     {
-        // Garante que o projeto pertence ao cliente autenticado
-        if ($project->client_id !== $request->user()->id) {
+        // Garante que o projeto pertence ao cliente
+        if ($project->client_id !== $user->id) {
             throw ValidationException::withMessages([
                 'project' => 'Acesso negado a este projeto.',
             ]);
@@ -30,13 +29,12 @@ final class AcceptProposalAction
             ]);
         }
 
-        // IP e User-Agent SEMPRE do servidor — nunca do body da request
         return ContractAcceptance::create([
             'project_id'       => $project->id,
-            'user_id'          => $request->user()->id,
+            'user_id'          => $user->id,
             'contract_version' => 1,
-            'ip_address'       => $request->ip(),
-            'user_agent'       => $request->userAgent(),
+            'ip_address'       => $ip,
+            'user_agent'       => $userAgent,
             'accepted_at'      => now(),
         ]);
     }

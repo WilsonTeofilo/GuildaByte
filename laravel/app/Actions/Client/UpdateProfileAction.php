@@ -3,28 +3,17 @@
 namespace App\Actions\Client;
 
 use App\Models\ClientProfile;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 /**
  * Atualiza o perfil do cliente.
- * Backend sempre re-valida e sanitiza — NUNCA confia no front.
+ * Recebe dados puros, desacoplado do Request.
  */
 final class UpdateProfileAction
 {
-    public static function run(Request $request): ClientProfile
+    public static function run(User $user, array $data): ClientProfile
     {
-        $data = $request->validate([
-            'phone'               => ['nullable', 'string', 'max:20', 'regex:/^[\d\+\-\(\) ]{10,20}$/'],
-            'business_type'       => ['nullable', 'string', 'max:100'],
-            'business_name'       => ['nullable', 'string', 'max:100'],
-            'instagram'           => ['nullable', 'string', 'max:100'],
-            'website'             => ['nullable', 'url', 'max:255'],
-            'marketing_email'     => ['nullable', 'boolean'],
-            'marketing_whatsapp'  => ['nullable', 'boolean'],
-            'delete_account'      => ['nullable', 'boolean'],
-        ]);
-
-        $profile = $request->user()->clientProfile ?? $request->user()->clientProfile()->create([
+        $profile = $user->clientProfile ?? $user->clientProfile()->create([
             'phone' => null,
         ]);
 

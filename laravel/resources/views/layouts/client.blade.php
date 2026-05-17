@@ -37,7 +37,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 Dashboard
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-[#aaa4bc] hover:bg-white/5 hover:text-white font-bold transition-colors">
+            <a href="{{ route('client.projects.index') }}" class="flex items-center gap-3 p-3 rounded-xl {{ request()->routeIs('client.projects.*') ? 'bg-[#7f77dd]/20 text-[#afa9ec] border border-[#7f77dd]/30' : 'text-[#aaa4bc] hover:bg-white/5 hover:text-white' }} font-bold transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                 Meus Projetos
             </a>
@@ -45,7 +45,7 @@
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 Novo Pedido
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-[#aaa4bc] hover:bg-white/5 hover:text-white font-bold transition-colors">
+            <a href="javascript:alert('Central de Suporte em desenvolvimento!');" class="flex items-center gap-3 p-3 rounded-xl text-[#aaa4bc] hover:bg-white/5 hover:text-white font-bold transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 Suporte
             </a>
@@ -92,19 +92,19 @@
                 <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 <span class="text-[10px] font-bold">Início</span>
             </a>
-            <a href="#" class="flex flex-col items-center p-2 text-[#aaa4bc]">
+            <a href="{{ route('client.projects.index') }}" class="flex flex-col items-center p-2 {{ request()->routeIs('client.projects.*') ? 'text-[#92ffcb]' : 'text-[#aaa4bc]' }}">
                 <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                 <span class="text-[10px] font-bold">Projetos</span>
             </a>
             <!-- Main Floating Action Button for Mobile -->
-            <a href="#" class="relative -top-4 flex flex-col items-center justify-center w-14 h-14 rounded-full bg-[#92ffcb] text-[#050507] shadow-[0_4px_20px_rgba(146,255,203,0.4)] border-4 border-[#050507]">
+            <a href="{{ route('client.wizard') }}" class="relative -top-4 flex flex-col items-center justify-center w-14 h-14 rounded-full bg-[#92ffcb] text-[#050507] shadow-[0_4px_20px_rgba(146,255,203,0.4)] border-4 border-[#050507]">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
             </a>
-            <a href="#" class="flex flex-col items-center p-2 text-[#aaa4bc]">
+            <a href="javascript:alert('Suporte em desenvolvimento!');" class="flex flex-col items-center p-2 text-[#aaa4bc]">
                 <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 <span class="text-[10px] font-bold">Suporte</span>
             </a>
-            <a href="#" class="flex flex-col items-center p-2 text-[#aaa4bc]">
+            <a href="{{ route('client.profile') }}" class="flex flex-col items-center p-2 {{ request()->routeIs('client.profile') ? 'text-[#92ffcb]' : 'text-[#aaa4bc]' }}">
                 <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 <span class="text-[10px] font-bold">Perfil</span>
             </a>

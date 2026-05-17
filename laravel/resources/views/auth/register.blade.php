@@ -188,7 +188,7 @@
               <div class="check-row">
                 <input type="checkbox" class="px-checkbox" id="terms" name="terms" required>
                 <label class="check-label" for="terms">
-                  Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a> (Obrigatório)
+                  Li e aceito os <a href="javascript:alert('Termos em desenvolvimento');">Termos de Uso</a> e a <a href="javascript:alert('Privacidade em desenvolvimento');">Política de Privacidade</a> (Obrigatório)
                 </label>
               </div>
               <div class="check-row">

@@ -129,5 +129,5 @@
     </div>
 </div>
 
-<script src="{{ asset('js/wizard.js') }}?v=1.0"></script>
+@vite(['resources/js/wizard.js'])
 @endsection

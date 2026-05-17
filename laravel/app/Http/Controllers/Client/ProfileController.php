@@ -21,19 +21,28 @@ class ProfileController extends Controller
         return view('client.profile', compact('user', 'profile'));
     }
 
-    /** Salva alterações no perfil (backend re-valida tudo) */
     public function update(Request $request): RedirectResponse
     {
-        UpdateProfileAction::run($request);
+        $data = $request->validate([
+            'phone'               => ['nullable', 'string', 'max:20', 'regex:/^[\d\+\-\(\) ]{10,20}$/'],
+            'business_type'       => ['nullable', 'string', 'max:100'],
+            'business_name'       => ['nullable', 'string', 'max:100'],
+            'instagram'           => ['nullable', 'string', 'max:100'],
+            'website'             => ['nullable', 'url', 'max:255'],
+            'marketing_email'     => ['nullable', 'boolean'],
+            'marketing_whatsapp'  => ['nullable', 'boolean'],
+            'delete_account'      => ['nullable', 'boolean'],
+        ]);
+
+        UpdateProfileAction::run($request->user(), $data);
 
         return back()->with('success', 'Perfil atualizado com sucesso!');
     }
 
-    /** Registra o aceite digital de uma proposta (IP + User-Agent do servidor) */
     public function acceptProposal(Request $request, Project $project): RedirectResponse
     {
         try {
-            AcceptProposalAction::run($project, $request);
+            AcceptProposalAction::run($project, $request->user(), $request->ip(), $request->userAgent());
             return back()->with('success', 'Proposta aceita com sucesso! O contrato está registrado.');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return back()->withErrors($e->validator);
