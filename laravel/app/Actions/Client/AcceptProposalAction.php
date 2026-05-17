@@ -29,13 +29,16 @@ final class AcceptProposalAction
             ]);
         }
 
-        return ContractAcceptance::create([
+        $acceptance = ContractAcceptance::create([
             'project_id' => $project->id,
             'user_id' => $user->id,
-            'contract_version' => 1,
             'ip_address' => $ip,
             'user_agent' => $userAgent,
             'accepted_at' => now(),
         ]);
+
+        $project->update(['status' => 'proposal_accepted']);
+
+        return $acceptance;
     }
 }

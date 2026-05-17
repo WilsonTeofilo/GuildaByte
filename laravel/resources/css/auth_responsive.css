@@ -1,0 +1,310 @@
+/* ============================================================
+   GUILDABYTE — AUTH RESPONSIVE  (SINGLE SOURCE OF TRUTH)
+   auth-main.css = base/desktop only
+   THIS FILE  = all responsive breakpoints
+
+   Breakpoints:
+   - Desktop:       > 1024px  → base rules in auth-main.css
+   - Notebook:      769px – 1024px
+   - Tablet/Mobile: ≤ 768px   → DISCORD-STYLE FULL VIEWPORT
+   ============================================================ */
+
+/* ── Legacy class neutralizers ── */
+.mobile-only       { display: none !important; }
+.md-only           { display: none !important; }
+.mobile-sleek      { all: unset; }
+.sleek-input       { all: unset; }
+.sleek-btn         { all: unset; }
+.sleek-icon        { display: none !important; }
+.mobile-logo       { display: none !important; }
+.fingerprint-wrapper { display: none !important; }
+
+
+/* ============================================================
+   NOTEBOOK  (769px – 1024px)
+   ============================================================ */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .gb-root,
+  .gb-reg {
+    padding: 40px 24px;
+    align-items: center;
+  }
+
+  .os-window,
+  .os-win2 {
+    max-width: 480px;
+  }
+
+  .os-body,
+  .os-body2 {
+    padding: 32px;
+  }
+
+  .gb-auth-logo { width: 240px; }
+  .scanlines    { opacity: 0.7; }
+  .pixel-grid   { opacity: 0.8; }
+
+  .corner-deco,
+  .corner-d {
+    width: 60px;
+    height: 60px;
+  }
+
+  .px-btn,
+  .px-btn2 {
+    font-size: 10px;
+    padding: 16px;
+  }
+
+  .two-col { gap: 10px; }
+}
+
+
+/* ============================================================
+   TABLET & MOBILE (≤ 768px)
+   Aqui matamos o "espaço vazio preto" de vez.
+   A janela estica pra 100% da altura e largura. Zero grid, 
+   zero borda cortada. Fica igual um app nativo.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── ROOT: padding ZERO, a janela é o viewport ── */
+  .gb-root,
+  .gb-reg {
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: stretch !important;       /* estica a janela na largura toda */
+    justify-content: stretch !important;   /* estica a janela na altura toda */
+    min-height: 100svh !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── BODY: fundo = mesmo tom da janela, elimina contraste preto/grid ── */
+  body {
+    background: var(--gb-window) !important;
+  }
+
+  /* ── Decorações: esconde o que não faz sentido em fullscreen ── */
+  .scanlines, .scanlines2,
+  .pixel-grid, .pixel-grid2,
+  .corner-deco, .corner-d,
+  .pixel-stars {
+    display: none !important;
+  }
+
+  /* ── BOTÃO VOLTAR: na parte inferior do form ── */
+  .auth-back-btn {
+    margin: 30px 0 0 0 !important;
+    width: 100% !important;
+    font-size: 10px !important;
+    min-height: 48px !important;
+    padding: 0 14px !important;
+  }
+
+  /* ── JANELA OS: FULL VIEWPORT, sem bordas, sem clip ── */
+  .os-window,
+  .os-win2 {
+    width: 100% !important;
+    max-width: none !important;
+    flex-grow: 1 !important;               /* FORÇA a janela a preencher a altura vazia */
+    display: flex !important;
+    flex-direction: column !important;
+    border: none !important;
+    clip-path: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    background: var(--gb-window) !important;
+  }
+
+  /* ── TITLEBAR: topo da tela ── */
+  .os-titlebar,
+  .os-tb2 {
+    padding: 12px 16px;
+    border-bottom: 1.5px solid var(--gb-border);
+  }
+
+  .os-dot, .os-d { width: 8px; height: 8px; }
+
+  .os-title-text,
+  .os-ttxt {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── BODY DA JANELA: preenche o resto ── */
+  .os-body,
+  .os-body2 {
+    flex-grow: 1 !important;               /* Empurra conteúdo para baixo se precisar */
+    padding: 24px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* ── LOGO ── */
+  .auth-logo-wrapper {
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+
+  .auth-logo-img { width: 50px; height: 50px; }
+  .auth-logo-text { font-size: 28px; }
+  .gb-auth-logo {
+    width: 200px;
+    filter: drop-shadow(0 0 14px rgba(127, 119, 221, 0.32));
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* ── LABELS ── */
+  .field-label,
+  .flbl {
+    font-size: 9px;
+    letter-spacing: 0.09em;
+    margin-bottom: 8px;
+  }
+
+  /* ── FIELD GROUPS ── */
+  .field-group,
+  .fgrp {
+    margin-bottom: 18px;
+  }
+
+  /* ── INPUTS: borda pixel mantida, tamanho touch-friendly ── */
+  .pixel-input,
+  .pinp {
+    padding: 14px;
+    font-size: 16px;            /* 16px = previne zoom no iOS */
+    border-width: 1.5px;
+  }
+
+  .pixel-input:focus,
+  .pinp:focus {
+    border-color: var(--gb-green);
+    box-shadow: 0 0 0 2px rgba(146, 255, 203, 0.15);
+  }
+
+  /* ── TOGGLE SENHA ── */
+  .toggle-password {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* ── BOTÕES CTA ── */
+  .px-btn,
+  .px-btn2 {
+    font-size: 11px;
+    padding: 18px 14px;
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+    border-width: 1.5px;
+    gap: 8px;
+  }
+
+  .px-btn:active,
+  .px-btn2:active {
+    transform: translateY(1px);
+    filter: brightness(0.96);
+  }
+
+  .px-btn.secondary,
+  .px-btn2.secondary {
+    border-color: var(--gb-border);
+    background: #08080d;
+    color: var(--gb-muted);
+  }
+
+  /* ── DIVIDER ── */
+  .divider-row { margin: 20px 0; }
+  .divider-txt { font-size: 9px; }
+
+  /* ── LINKS (criar conta / esqueci senha) ── */
+  .links-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .px-link,
+  .px-lnk {
+    font-size: 9px;
+    min-height: 48px;
+    padding: 10px;
+    border-width: 1.5px;
+    line-height: 1.6;
+  }
+
+  /* ── TWO-COL / BTN-ROW: empilha ── */
+  .two-col,
+  .btn-row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ── XP BAR (cadastro) ── */
+  .xp-bar-wrap { margin-bottom: 20px; }
+  .xp-track    { height: 12px; }
+  .xp-label,
+  .xp-step-txt { font-size: 9px; }
+  .step-dot    { width: 8px; height: 8px; }
+
+  /* ── STEP HEADER ── */
+  .step-header { margin-bottom: 16px; gap: 10px; }
+  .step-title  { font-size: 11px; }
+  .step-sub    { font-size: 13px; }
+
+  /* ── SAVED PLAN ── */
+  .saved-plan       { padding: 14px; margin-bottom: 16px; }
+  .saved-plan span  { font-size: 9px; }
+  .saved-plan strong { font-size: 16px; }
+
+  /* ── MISC ── */
+  .auth-status   { font-size: 13px; margin-bottom: 16px; }
+  .cursor-blink  { width: 7px; height: 12px; }
+  .px-checkbox   { width: 20px; height: 20px; }
+  .check-label   { font-size: 12px; line-height: 1.5; }
+  .bottom-link   { margin-top: auto; padding-top: 24px; font-size: 13px; }
+
+  /* ── GOOGLE BTN ── */
+  .google-btn-disabled {
+    font-size: 9px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  /* ── OTP TOGGLE ── */
+  .auth-toggle-btn {
+    font-size: 9px;
+    padding: 10px 16px;
+  }
+
+  /* ── ALERT BOXES ── */
+  .auth-alert-success,
+  .auth-alert-error {
+    font-size: 12px;
+    padding: 14px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE SMALL  (≤ 380px — iPhone SE, telas estreitas)
+   ============================================================ */
+@media (max-width: 380px) {
+  .os-body,
+  .os-body2 {
+    padding: 20px 14px 24px;
+  }
+
+  .auth-logo-img { width: 44px; height: 44px; }
+  .auth-logo-text { font-size: 24px; }
+  .gb-auth-logo { width: 160px; }
+
+  .px-btn, .px-btn2 { font-size: 10px; padding: 16px 10px; }
+
+  .flbl          { font-size: 8px; }
+  .os-title-text { font-size: 8px; }
+  .px-link       { font-size: 8px; min-height: 44px; }
+  .xp-step-txt   { font-size: 8px; }
+}

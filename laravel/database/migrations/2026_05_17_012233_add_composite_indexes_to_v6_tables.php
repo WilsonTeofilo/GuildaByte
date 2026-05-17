@@ -49,7 +49,7 @@ return new class extends Migration
         });
 
         // cards — kanban ordenado por coluna + posição
-        Schema::table('cards', function (Blueprint $table) {
+        Schema::table('board_cards', function (Blueprint $table) {
             $table->index(['board_column_id', 'position']);
         });
 
@@ -74,7 +74,7 @@ return new class extends Migration
         Schema::table('payments', fn ($t) => $t->dropIndex(['client_id', 'status']));
         Schema::table('commissions', fn ($t) => $t->dropIndex(['user_id', 'status']));
         Schema::table('reward_scores', fn ($t) => $t->dropIndex(['reward_event_id', 'user_id']));
-        Schema::table('cards', fn ($t) => $t->dropIndex(['board_column_id', 'position']));
+        Schema::table('board_cards', fn ($t) => $t->dropIndex(['board_column_id', 'position']));
         Schema::table('audit_logs', fn ($t) => $t->dropIndex(['user_id', 'action']));
         Schema::table('security_events', fn ($t) => $t->dropIndex(['user_id', 'event_type']));
     }

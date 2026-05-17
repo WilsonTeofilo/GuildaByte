@@ -76,22 +76,9 @@ return new class extends Migration
         });
 
         // === Board Extra Tables ===
-        Schema::create('card_checklists', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('card_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->timestamps();
-        });
-        Schema::create('card_checklist_items', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('card_checklist_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
-            $table->boolean('is_completed')->default(false);
-            $table->timestamps();
-        });
         Schema::create('card_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('board_card_id')->constrained()->cascadeOnDelete();
             $table->string('file_path');
             $table->string('file_name');
             $table->timestamps();
@@ -104,20 +91,13 @@ return new class extends Migration
         });
         Schema::create('card_label_links', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('board_card_id')->constrained()->cascadeOnDelete();
             $table->foreignId('card_label_id')->constrained()->cascadeOnDelete();
         });
         Schema::create('card_dependencies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('depends_on_card_id')->constrained('cards')->cascadeOnDelete();
-        });
-        Schema::create('card_activity_logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('card_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('action');
-            $table->timestamps();
+            $table->foreignId('board_card_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('depends_on_card_id')->constrained('board_cards')->cascadeOnDelete();
         });
 
         // === Board Templates ===
@@ -340,13 +320,10 @@ return new class extends Migration
         Schema::dropIfExists('board_template_cards');
         Schema::dropIfExists('board_template_columns');
         Schema::dropIfExists('board_templates');
-        Schema::dropIfExists('card_activity_logs');
         Schema::dropIfExists('card_dependencies');
         Schema::dropIfExists('card_label_links');
         Schema::dropIfExists('card_labels');
         Schema::dropIfExists('card_attachments');
-        Schema::dropIfExists('card_checklist_items');
-        Schema::dropIfExists('card_checklists');
         Schema::dropIfExists('scope_addendums');
         Schema::dropIfExists('campaign_recipients');
         Schema::dropIfExists('campaigns');

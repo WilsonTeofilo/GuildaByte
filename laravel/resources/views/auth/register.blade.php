@@ -7,11 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pixelify+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-  @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/auth.js'])
-  <link rel="stylesheet" href="{{ asset('style/design-system.css') }}?v=1.0">
-  <link rel="stylesheet" href="{{ asset('style/auth.css') }}?v=1.5">
-  <link rel="stylesheet" href="{{ asset('style/auth-helpers.css') }}?v=1.0">
-  <link rel="stylesheet" href="{{ asset('style/auth_responsive.css') }}?v=1.0">
+  @vite(['resources/css/app.css', 'resources/css/auth.css', 'resources/js/app.js', 'resources/js/auth.js'])
 </head>
 <body>
   <main class="gb-root">
@@ -20,7 +16,6 @@
     <div class="corner-deco tl"></div>
     <div class="corner-deco br"></div>
 
-    <a class="auth-back-btn" href="{{ route('home') }}">&lt; VOLTAR</a>
 
     <svg class="pixel-stars" aria-hidden="true">
       <rect x="10%" y="20%" width="4" height="4" fill="#7F77DD" opacity="0.5"/>
@@ -207,6 +202,8 @@
             </div>
           </div>
         </form>
+
+        <a class="auth-back-btn" href="{{ route('home') }}">&lt; VOLTAR</a>
       </div>
     </section>
   </main>

@@ -92,7 +92,7 @@ return new class extends Migration
         });
 
         // === GUILDA BOARD ===
-        Schema::create('boards', function (Blueprint $table) {
+        Schema::create('guilda_boards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('name');
@@ -101,37 +101,37 @@ return new class extends Migration
 
         Schema::create('board_columns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('board_id')->constrained()->onDelete('cascade');
-            $table->string('name');
+            $table->foreignId('guilda_board_id')->constrained()->onDelete('cascade');
+            $table->string('title');
             $table->integer('position')->default(0);
             $table->timestamps();
         });
 
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('board_cards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('board_column_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('type')->default('task'); // task, bug, feature
-            $table->string('priority')->default('medium'); // low, medium, high, critical
-            $table->string('status')->default('normal');
             $table->integer('position')->default(0);
-            $table->decimal('estimated_hours', 5, 2)->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('card_members', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('card_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained();
+            $table->json('checklist')->nullable();
             $table->timestamps();
         });
 
         Schema::create('card_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id')->constrained()->onDelete('cascade');
+            $table->foreignId('board_card_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained();
             $table->text('content');
+            $table->timestamps();
+        });
+
+        Schema::create('card_activity_logs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('board_card_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->string('action');
+            $table->string('details')->nullable();
             $table->timestamps();
         });
 
@@ -249,11 +249,11 @@ return new class extends Migration
         Schema::dropIfExists('commissions');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('support_ticket_messages');
+        Schema::dropIfExists('card_activity_logs');
         Schema::dropIfExists('card_comments');
-        Schema::dropIfExists('card_members');
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('board_cards');
         Schema::dropIfExists('board_columns');
-        Schema::dropIfExists('boards');
+        Schema::dropIfExists('guilda_boards');
         Schema::dropIfExists('project_invitations');
         Schema::dropIfExists('project_members');
         Schema::dropIfExists('contract_acceptances');
