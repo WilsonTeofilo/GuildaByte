@@ -1,0 +1,40 @@
+/* Helpers para remover inline styles do Login e Register */
+
+.auth-logo-wrapper { display: flex; justify-content: center; margin-bottom: 24px; }
+.auth-brand-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.auth-logo-img { border-radius: 8px; border: 1px solid var(--gb-border); }
+.auth-logo-text { color: var(--gb-text); font-family: 'Pixelify Sans', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; }
+.auth-logo-sub { display: block; color: var(--gb-purple-3); }
+
+.auth-alert-success { background: rgba(146,255,203,0.1); border: 1px solid var(--gb-green); color: var(--gb-green); padding: 12px; margin-bottom: 20px; font-size: 12px; font-family: monospace; }
+.auth-alert-error { background: rgba(255,77,77,0.1); border: 1px solid var(--gb-danger); color: var(--gb-danger); padding: 12px; margin-bottom: 20px; font-size: 12px; font-family: monospace; }
+
+.auth-field-error { color: var(--gb-danger); font-size: 11px; margin-top: 5px; }
+
+.auth-fgrp-mb { margin-bottom: 24px; }
+.auth-fgrp-mt { margin-top: 24px; }
+
+.auth-btn-purple { background: var(--gb-purple); color: #fff; border-color: var(--gb-border); margin-top: 24px; }
+.auth-btn-green { background: var(--gb-green); color: var(--gb-bg); margin-top: 24px; }
+
+.auth-otp-form { display: none; }
+.auth-otp-step2 { display: none; }
+.auth-otp-lbl { color: var(--gb-green); }
+.auth-otp-help { font-size: 11px; color: var(--gb-muted); margin-bottom: 10px; }
+.auth-otp-input { text-align: center; font-size: 24px; letter-spacing: 10px; font-family: monospace; color: var(--gb-green); }
+.auth-otp-error { color: var(--gb-danger); font-size: 11px; margin-top: 5px; display: none; }
+
+.auth-toggle-box { text-align: center; margin-top: 15px; }
+.auth-toggle-btn { background: transparent; border: 1px dashed var(--gb-purple); color: var(--gb-purple-light); padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 8px; cursor: pointer; border-radius: 4px; transition: all 0.2s; }
+
+.auth-xp-fill { width: 50%; }
+
+.auth-px-link { width: 100%; display: block; text-align: center; }
+
+/* Dashboard classes used in index/show */
+.proj-empty-emoji { margin-bottom: 1rem; font-size: 2rem; }
+.proj-new-link { color: var(--gb-green); text-decoration: underline; margin-top: 1rem; display: inline-block; }
+.proj-accept-box { border: 2px solid var(--gb-green); border-radius: 8px; padding: 1.5rem; background: rgba(146,255,203,0.04); }
+.proj-accept-text { font-size: 0.8rem; color: var(--gb-text); margin-bottom: 1rem; }
+.proj-accept-sub { color: var(--gb-muted); }
+.proj-accept-btn { background: var(--gb-green); color: #0a0a10; border: none; padding: 0.8rem 2rem; font-family: 'Press Start 2P', monospace; font-size: 0.65rem; border-radius: 4px; cursor: pointer; transition: opacity 0.2s; }

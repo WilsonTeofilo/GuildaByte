@@ -98,7 +98,7 @@
 
         <!-- STEP 5: Resumo e Snapshot -->
         <div class="wizard-panel" data-step="5" data-title="Confirmar Snapshot" data-sub="Revise as informações antes de abrir o pedido formal.">
-            <div class="gb-card p-6 border-l-4 border-l-[#92ffcb]" style="background: var(--gb-surface-2)">
+            <div class="gb-card p-6 border-l-4 border-l-[#92ffcb] bg-[#101018]">
                 <h3 class="text-xl font-bold mb-4" id="res_name">Nome do Projeto</h3>
                 <div class="grid grid-cols-2 gap-4 text-sm mb-4">
                     <div>
@@ -124,7 +124,7 @@
     </div>
 
     <div class="wizard-footer">
-        <button class="w-btn prev" id="btnPrev" style="visibility: hidden;">VOLTAR</button>
+        <button class="w-btn prev hidden" id="btnPrev">VOLTAR</button>
         <button class="w-btn next" id="btnNext">PRÓXIMO</button>
     </div>
 </div>

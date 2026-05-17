@@ -10,6 +10,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/auth.js'])
   <link rel="stylesheet" href="{{ asset('style/design-system.css') }}?v=1.0">
   <link rel="stylesheet" href="{{ asset('style/auth.css') }}?v=1.5">
+  <link rel="stylesheet" href="{{ asset('style/auth-helpers.css') }}?v=1.0">
   <link rel="stylesheet" href="{{ asset('style/auth_responsive.css') }}?v=1.0">
 </head>
 <body>
@@ -37,10 +38,10 @@
       </div>
 
       <div class="os-body2">
-        <div class="logo-area" style="display: flex; justify-content: center; margin-bottom: 24px;">
-          <a class="brand" href="{{ route('home') }}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="48" height="48" style="border-radius: 8px; border: 1px solid var(--gb-purple-deep);">
-            <span style="color: var(--gb-text); font-family: 'Pixelify Sans', sans-serif; font-size: 22px; font-weight: 700; line-height: 1;">Guilda<span style="display: block; color: var(--gb-purple-3);">Byte</span></span>
+        <div class="auth-logo-wrapper">
+          <a class="auth-brand-link" href="{{ route('home') }}">
+            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="48" height="48" class="auth-logo-img">
+            <span class="auth-logo-text">Guilda<span class="auth-logo-sub">Byte</span></span>
           </a>
         </div>
 
@@ -53,7 +54,7 @@
             </div>
           </div>
           <div class="xp-track">
-            <div class="xp-fill" id="xpFill" style="width: 50%;">
+            <div class="xp-fill auth-xp-fill" id="xpFill">
               <div class="xp-pixel-shine"></div>
             </div>
           </div>
@@ -81,7 +82,7 @@
               <div class="input-wrap">
                 <input class="pinp" id="name" name="name" type="text" placeholder="Seu nome" value="{{ old('name') }}" required minlength="2" maxlength="100">
               </div>
-              @error('name')<div class="field-error-server">{{ $message }}</div>@enderror
+              @error('name')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
 
             <div class="fgrp">
@@ -89,7 +90,7 @@
               <div class="input-wrap">
                 <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required>
               </div>
-              @error('email')<div class="field-error-server">{{ $message }}</div>@enderror
+              @error('email')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
 
             <div class="fgrp">
@@ -97,7 +98,7 @@
               <div class="input-wrap">
                 <input class="pinp" id="phone" name="phone" type="tel" placeholder="(11) 99999-9999" value="{{ old('phone') }}" maxlength="20">
               </div>
-              @error('phone')<div class="field-error-server">{{ $message }}</div>@enderror
+              @error('phone')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
 
             <div class="two-col">
@@ -114,7 +115,7 @@
                   <div class="pwd-block" id="pb4"></div>
                 </div>
                 <span id="pwdLabel" class="pwd-label"></span>
-                @error('password')<div class="field-error-server">{{ $message }}</div>@enderror
+                @error('password')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
               </div>
 
               <div class="fgrp">
@@ -142,7 +143,7 @@
             </div>
 
             <div class="bottom-link">
-              <a class="px-link" href="{{ route('login') }}" style="width: 100%;">&#9654; JÁ TENHO CONTA</a>
+              <a class="px-link auth-px-link" href="{{ route('login') }}">&#9654; JÁ TENHO CONTA</a>
             </div>
           </div>
 
@@ -172,7 +173,7 @@
                   <option value="Outro" {{ old('business_type') == 'Outro' ? 'selected' : '' }}>Outro</option>
                 </select>
               </div>
-              @error('business_type')<div class="field-error-server">{{ $message }}</div>@enderror
+              @error('business_type')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
 
             <div class="fgrp">
@@ -180,10 +181,10 @@
               <div class="input-wrap">
                 <input class="pinp" id="business_name" name="business_name" type="text" placeholder="Ex: Barbearia do Wilson" value="{{ old('business_name') }}" maxlength="100">
               </div>
-              @error('business_name')<div class="field-error-server">{{ $message }}</div>@enderror
+              @error('business_name')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
             </div>
 
-            <div class="fgrp" style="margin-top: 24px;">
+            <div class="fgrp auth-fgrp-mt">
               <div class="check-row">
                 <input type="checkbox" class="px-checkbox" id="terms" name="terms" required>
                 <label class="check-label" for="terms">

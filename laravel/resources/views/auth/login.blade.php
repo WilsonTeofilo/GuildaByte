@@ -10,6 +10,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/auth.js'])
   <link rel="stylesheet" href="{{ asset('style/design-system.css') }}?v=1.0">
   <link rel="stylesheet" href="{{ asset('style/auth.css') }}?v=1.5">
+  <link rel="stylesheet" href="{{ asset('style/auth-helpers.css') }}?v=1.0">
   <link rel="stylesheet" href="{{ asset('style/auth_responsive.css') }}?v=1.0">
 </head>
 <body>
@@ -35,10 +36,10 @@
       </div>
 
       <div class="os-body">
-        <div class="logo-area" style="display: flex; justify-content: center; margin-bottom: 30px;">
-          <a class="brand" href="{{ route('home') }}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="48" height="48" style="border-radius: 8px; border: 1px solid var(--gb-purple-deep);">
-            <span style="color: var(--gb-text); font-family: 'Pixelify Sans', sans-serif; font-size: 22px; font-weight: 700; line-height: 1;">Guilda<span style="display: block; color: var(--gb-purple-3);">Byte</span></span>
+        <div class="auth-logo-wrapper">
+          <a class="auth-brand-link" href="{{ route('home') }}">
+            <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="" width="48" height="48" class="auth-logo-img">
+            <span class="auth-logo-text">Guilda<span class="auth-logo-sub">Byte</span></span>
           </a>
         </div>
 
@@ -52,7 +53,7 @@
 
         {{-- Alertas de Sessão --}}
         @if(session('status'))
-          <div style="background: rgba(146,255,203,0.1); border: 1px solid var(--gb-green); color: var(--gb-green); padding: 12px; margin-bottom: 20px; font-size: 12px; font-family: monospace;">
+          <div class="auth-alert-success">
             ✓ {{ session('status') }}
           </div>
         @endif
@@ -65,43 +66,43 @@
             <div class="input-wrap">
               <input class="pinp" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" required autofocus>
             </div>
-            @error('email')<div class="field-error-server" style="color: var(--gb-danger); font-size: 11px; margin-top: 5px;">{{ $message }}</div>@enderror
+            @error('email')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
           </div>
 
-          <div class="fgrp" style="margin-bottom: 24px;">
+          <div class="fgrp auth-fgrp-mb">
             <label class="flbl" for="password">&#9654; SENHA</label>
             <div class="input-wrap">
               <input class="pinp" id="password" name="password" type="password" placeholder="********" required>
               <button class="toggle-password" type="button" data-toggle-password="#password" aria-label="Mostrar senha">S</button>
             </div>
-            @error('password')<div class="field-error-server" style="color: var(--gb-danger); font-size: 11px; margin-top: 5px;">{{ $message }}</div>@enderror
+            @error('password')<div class="field-error-server auth-field-error">{{ $message }}</div>@enderror
           </div>
           <button class="px-btn" type="submit">ENTRAR NO SISTEMA</button>
         </form>
 
         <!-- LOGIN OTP (Escondido por padrão) -->
-        <form id="formLoginOtp" style="display: none;" onsubmit="event.preventDefault(); return false;" data-send-url="{{ route('otp.send') }}" data-verify-url="{{ route('otp.verify') }}">
+        <form id="formLoginOtp" class="auth-otp-form" onsubmit="event.preventDefault(); return false;" data-send-url="{{ route('otp.send') }}" data-verify-url="{{ route('otp.verify') }}">
           <div class="fgrp" id="otpStep1">
             <label class="flbl" for="otpEmail">&#9654; EMAIL CADASTRADO</label>
             <div class="input-wrap">
               <input class="pinp" id="otpEmail" type="email" placeholder="seuemail@exemplo.com" required>
             </div>
-            <button class="px-btn" type="button" id="btnSendOtp" style="margin-top: 24px; background: var(--gb-purple); color: #fff; border-color: var(--gb-border);">ENVIAR CÓDIGO</button>
+            <button class="px-btn auth-btn-purple" type="button" id="btnSendOtp">ENVIAR CÓDIGO</button>
           </div>
 
-          <div class="fgrp" id="otpStep2" style="display: none;">
-            <label class="flbl" style="color: var(--gb-green);" for="otpCode">&#9654; CÓDIGO (6 DÍGITOS)</label>
-            <p style="font-size: 11px; color: var(--gb-muted); margin-bottom: 10px;">Verifique seu e-mail. Expira em 3 min.</p>
+          <div class="fgrp auth-otp-step2" id="otpStep2">
+            <label class="flbl auth-otp-lbl" for="otpCode">&#9654; CÓDIGO (6 DÍGITOS)</label>
+            <p class="auth-otp-help">Verifique seu e-mail. Expira em 3 min.</p>
             <div class="input-wrap">
-              <input class="pinp" id="otpCode" type="text" maxlength="6" style="text-align: center; font-size: 24px; letter-spacing: 10px; font-family: monospace; color: var(--gb-green);" placeholder="000000" required>
+              <input class="pinp auth-otp-input" id="otpCode" type="text" maxlength="6" placeholder="000000" required>
             </div>
-            <div id="otpError" style="color: var(--gb-danger); font-size: 11px; margin-top: 5px; display: none;"></div>
-            <button class="px-btn" type="button" id="btnVerifyOtp" style="margin-top: 24px; background: var(--gb-green); color: var(--gb-bg);">CONFIRMAR CÓDIGO</button>
+            <div id="otpError" class="auth-otp-error"></div>
+            <button class="px-btn auth-btn-green" type="button" id="btnVerifyOtp">CONFIRMAR CÓDIGO</button>
           </div>
         </form>
 
-        <div style="text-align: center; margin-top: 15px;">
-            <button type="button" id="toggleAuthMode" style="background: transparent; border: 1px dashed var(--gb-purple); color: var(--gb-purple-light); padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 8px; cursor: pointer; border-radius: 4px; transition: all 0.2s;">
+        <div class="auth-toggle-box">
+            <button type="button" id="toggleAuthMode" class="auth-toggle-btn">
                 [ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]
             </button>
         </div>

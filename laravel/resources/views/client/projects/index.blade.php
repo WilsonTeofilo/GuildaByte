@@ -49,9 +49,9 @@
     </div>
   @empty
     <div class="empty-state">
-      <p style="margin-bottom: 1rem; font-size: 2rem;">🛡️</p>
+      <p class="proj-empty-emoji">🛡️</p>
       <p>Nenhuma missão iniciada.</p>
-      <a href="{{ route('client.wizard') }}" style="color: var(--gb-green); text-decoration: underline; margin-top: 1rem; display: inline-block;">Iniciar Nova Missão</a>
+      <a href="{{ route('client.wizard') }}" class="proj-new-link">Iniciar Nova Missão</a>
     </div>
   @endforelse
 </div>
