@@ -41,3 +41,13 @@
   background-size: 32px 32px, 32px 32px, auto;
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='0' y='0' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='8' y='8' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='0' y='4' width='4' height='8' fill='%237F77DD'/%3E%3C/svg%3E") 0 0, auto;
 }
+
+@layer components {
+  .gb-card {
+    @apply bg-gb-panel rounded-xl border border-gb-line relative overflow-hidden;
+    box-shadow: 0 4px 24px -12px rgba(127, 119, 221, 0.1);
+  }
+  .gb-btn-primary {
+    @apply bg-gb-purple text-gb-text font-bold rounded-lg border border-gb-purple-3/30 hover:bg-gb-purple-2 transition-colors inline-flex justify-center items-center;
+  }
+}
