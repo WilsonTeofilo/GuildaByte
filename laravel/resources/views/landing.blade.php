@@ -69,7 +69,7 @@
            src="{{ asset('assets/HeaderTrans.webp') }}"
            alt=""
            aria-hidden="true"
-           width="40" height="40">
+           width="90" height="90">
       <span class="brand-name">Guilda<span>Byte</span></span>
     </a>
 
