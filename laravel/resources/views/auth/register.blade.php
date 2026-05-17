@@ -31,7 +31,7 @@
       <div class="os-body2">
         <div class="logo-top" style="display: flex; justify-content: center; margin-bottom: 30px;">
           <a class="brand" href="{{ route('home') }}" aria-label="Voltar para inicio" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img class="brand-avatar" src="{{ asset('assets/HeaderTrans.png') }}" alt="" aria-hidden="true" style="width: 58px; height: 58px; border-radius: 8px; border: 1px solid var(--gb-purple-deep);">
+            <img class="brand-avatar" src="{{ asset('assets/HeaderTrans.webp') }}" alt="" aria-hidden="true" width="58" height="58" style="width: 58px; height: 58px; border-radius: 8px; border: 1px solid var(--gb-purple-deep);">
             <span class="brand-name" style="color: var(--gb-text); font-family: 'Pixelify Sans', Inter, sans-serif; font-size: 26px; font-weight: 700; line-height: 1;">Guilda<span style="display: block; color: var(--gb-purple-3);">Byte</span></span>
           </a>
         </div>

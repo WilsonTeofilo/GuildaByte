@@ -66,7 +66,7 @@
     <aside class="hidden md:flex flex-col w-64 border-r border-[#26215c] bg-[#0A0A10] h-full z-20">
         <div class="p-6">
             <a href="{{ route('client.dashboard') }}" class="flex items-center gap-3 decoration-transparent">
-                <img src="{{ asset('assets/HeaderTrans.png') }}" alt="GuildaByte Avatar" class="w-10 h-10 rounded border border-[#26215c]">
+                <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="GuildaByte Avatar" class="w-10 h-10 rounded border border-[#26215c]" width="40" height="40" loading="lazy" decoding="async">
                 <div>
                     <strong class="text-xl font-bold block pixel-font text-[#f6f4ff]">GuildaByte</strong>
                     <span class="text-[#7f77dd] text-xs font-semibold uppercase tracking-wider">Cliente</span>
@@ -115,7 +115,7 @@
         <!-- Mobile Header -->
         <header class="md:hidden flex items-center justify-between p-4 border-b border-[#26215c] bg-[#0A0A10] z-20">
             <div class="flex items-center gap-2">
-                <img src="{{ asset('assets/HeaderTrans.png') }}" alt="Logo" class="w-8 h-8 rounded">
+                <img src="{{ asset('assets/HeaderTrans.webp') }}" alt="Logo GuildaByte" class="w-8 h-8 rounded" width="32" height="32" loading="lazy" decoding="async">
                 <strong class="text-lg font-bold pixel-font">GuildaByte</strong>
             </div>
             <div class="w-8 h-8 rounded-full bg-[#26215c] flex items-center justify-center text-xs font-bold">

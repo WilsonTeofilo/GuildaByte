@@ -66,7 +66,7 @@
   <header class="site-header">
     <a class="brand" href="#top" aria-label="GuildaByte inicio">
       <img class="brand-avatar"
-           src="{{ asset('assets/HeaderTrans.png') }}"
+           src="{{ asset('assets/HeaderTrans.webp') }}"
            alt=""
            aria-hidden="true"
            width="40" height="40">
