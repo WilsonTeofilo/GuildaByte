@@ -15,49 +15,7 @@
     
     <!-- Custom CSS (Keep the original UI/UX vibes) -->
     <link rel="stylesheet" href="{{ asset('style/design-system.css') }}?v=1.0">
-    <style>
-        /* Mobile-first basic resets and variables for client portal */
-        :root {
-            --gb-bg: #050507;
-            --gb-panel: #101018;
-            --gb-panel-light: #13131c;
-            --gb-border: #26215c;
-            --gb-green: #92ffcb;
-            --gb-purple: #7f77dd;
-            --gb-text: #f6f4ff;
-            --gb-muted: #aaa4bc;
-            --gb-danger: #ff7893;
-        }
-        body.client-portal {
-            background-color: var(--gb-bg);
-            color: var(--gb-text);
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-        .pixel-font {
-            font-family: 'Pixelify Sans', cursive;
-        }
-        .gb-card {
-            background-color: var(--gb-panel);
-            border: 1px solid var(--gb-border);
-            border-radius: 16px;
-        }
-        .gb-btn-primary {
-            background-color: var(--gb-green);
-            color: #050507;
-            font-weight: 700;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-        }
-        .gb-btn-primary:hover {
-            background-color: #b8ffdd;
-            transform: translateY(-1px);
-        }
-        /* Mobile Navigation Bar (Bottom) */
-        @media (max-width: 768px) {
-            .mobile-nav-spacing { padding-bottom: 80px; }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('style/client.css') }}?v=1.0">
     @stack('styles')
 </head>
 <body class="client-portal flex h-screen overflow-hidden">

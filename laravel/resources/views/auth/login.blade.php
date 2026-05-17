@@ -80,7 +80,7 @@
         </form>
 
         <!-- LOGIN OTP (Escondido por padrão) -->
-        <form id="formLoginOtp" style="display: none;" onsubmit="event.preventDefault(); return false;">
+        <form id="formLoginOtp" style="display: none;" onsubmit="event.preventDefault(); return false;" data-send-url="{{ route('otp.send') }}" data-verify-url="{{ route('otp.verify') }}">
           <div class="fgrp" id="otpStep1">
             <label class="flbl" for="otpEmail">&#9654; EMAIL CADASTRADO</label>
             <div class="input-wrap">
@@ -124,111 +124,6 @@
       </div>
     </section>
 
-    <script>
-      // Lógica específica do OTP via Fetch (Login only)
-      document.addEventListener('DOMContentLoaded', () => {
-          const btnToggle = document.getElementById('toggleAuthMode');
-          const formDefault = document.getElementById('formLoginDefault');
-          const formOtp = document.getElementById('formLoginOtp');
-          
-          let isOtpMode = false;
-          
-          btnToggle.addEventListener('click', () => {
-              isOtpMode = !isOtpMode;
-              if (isOtpMode) {
-                  formDefault.style.display = 'none';
-                  formOtp.style.display = 'block';
-                  btnToggle.textContent = '[ ALTERNAR PARA LOGIN COM SENHA ]';
-                  btnToggle.style.borderColor = 'var(--gb-green)';
-                  btnToggle.style.color = 'var(--gb-green)';
-              } else {
-                  formDefault.style.display = 'block';
-                  formOtp.style.display = 'none';
-                  btnToggle.textContent = '[ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]';
-                  btnToggle.style.borderColor = 'var(--gb-purple)';
-                  btnToggle.style.color = 'var(--gb-purple-light)';
-              }
-          });
-
-          const btnSend = document.getElementById('btnSendOtp');
-          const btnVerify = document.getElementById('btnVerifyOtp');
-          const emailInput = document.getElementById('otpEmail');
-          const codeInput = document.getElementById('otpCode');
-          const step1 = document.getElementById('otpStep1');
-          const step2 = document.getElementById('otpStep2');
-          const otpError = document.getElementById('otpError');
-
-          btnSend.addEventListener('click', async () => {
-              const email = emailInput.value;
-              if(!email) return alert('Digite o email!');
-              
-              btnSend.textContent = 'ENVIANDO...';
-              btnSend.disabled = true;
-
-              try {
-                  const res = await fetch('{{ route("otp.send") }}', {
-                      method: 'POST',
-                      headers: {
-                          'Content-Type': 'application/json',
-                          'Accept': 'application/json',
-                          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                      },
-                      body: JSON.stringify({ email })
-                  });
-                  const data = await res.json();
-                  
-                  if(data.success) {
-                      step1.style.display = 'none';
-                      step2.style.display = 'block';
-                  } else {
-                      alert(data.message || 'Erro ao enviar.');
-                  }
-              } catch (e) {
-                  alert('Erro de conexão.');
-              }
-              btnSend.textContent = 'ENVIAR CÓDIGO';
-              btnSend.disabled = false;
-          });
-
-          btnVerify.addEventListener('click', async () => {
-              const email = emailInput.value;
-              const code = codeInput.value;
-              if(code.length !== 6) return alert('Código deve ter 6 dígitos.');
-              
-              btnVerify.textContent = 'VALIDANDO...';
-              btnVerify.disabled = true;
-              otpError.style.display = 'none';
-
-              try {
-                  const res = await fetch('{{ route("otp.verify") }}', {
-                      method: 'POST',
-                      headers: {
-                          'Content-Type': 'application/json',
-                          'Accept': 'application/json',
-                          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                      },
-                      body: JSON.stringify({ email, code })
-                  });
-                  const data = await res.json();
-                  
-                  if(data.success) {
-                      btnVerify.textContent = 'SUCESSO! REDIRECIONANDO...';
-                      window.location.href = data.redirect;
-                  } else {
-                      otpError.textContent = data.message || 'Código inválido.';
-                      otpError.style.display = 'block';
-                      btnVerify.textContent = 'CONFIRMAR CÓDIGO';
-                      btnVerify.disabled = false;
-                  }
-              } catch (e) {
-                  otpError.textContent = 'Erro de conexão.';
-                  otpError.style.display = 'block';
-                  btnVerify.textContent = 'CONFIRMAR CÓDIGO';
-                  btnVerify.disabled = false;
-              }
-          });
-      });
-    </script>
   </main>
 </body>
 </html>

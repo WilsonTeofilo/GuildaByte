@@ -167,4 +167,130 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ── Input Mask (WhatsApp) ─────────────────────────────────────
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, ''); // remove tudo que não for dígito
+            
+            // Máscara (11) 99999-9999
+            if (val.length > 0) {
+                val = '(' + val;
+            }
+            if (val.length > 3) {
+                val = val.slice(0, 3) + ') ' + val.slice(3);
+            }
+            if (val.length > 10) {
+                val = val.slice(0, 10) + '-' + val.slice(10, 14);
+            }
+            
+            e.target.value = val;
+        });
+    }
+
+    // ── Lógica OTP (Login Screen) ─────────────────────────────────
+    const formOtp = document.getElementById('formLoginOtp');
+    if (formOtp) {
+        const btnToggle   = document.getElementById('toggleAuthMode');
+        const formDefault = document.getElementById('formLoginDefault');
+        let isOtpMode     = false;
+        
+        btnToggle?.addEventListener('click', () => {
+            isOtpMode = !isOtpMode;
+            if (isOtpMode) {
+                formDefault.style.display = 'none';
+                formOtp.style.display = 'block';
+                btnToggle.textContent = '[ ALTERNAR PARA LOGIN COM SENHA ]';
+                btnToggle.style.borderColor = 'var(--gb-green)';
+                btnToggle.style.color = 'var(--gb-green)';
+            } else {
+                formDefault.style.display = 'block';
+                formOtp.style.display = 'none';
+                btnToggle.textContent = '[ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]';
+                btnToggle.style.borderColor = 'var(--gb-purple)';
+                btnToggle.style.color = 'var(--gb-purple-light)';
+            }
+        });
+
+        const btnSend   = document.getElementById('btnSendOtp');
+        const btnVerify = document.getElementById('btnVerifyOtp');
+        const emailInp  = document.getElementById('otpEmail');
+        const codeInp   = document.getElementById('otpCode');
+        const step1     = document.getElementById('otpStep1');
+        const step2     = document.getElementById('otpStep2');
+        const otpError  = document.getElementById('otpError');
+        const sendUrl   = formOtp.dataset.sendUrl;
+        const verifyUrl = formOtp.dataset.verifyUrl;
+
+        btnSend?.addEventListener('click', async () => {
+            const email = emailInp.value;
+            if(!email) return alert('Digite o email!');
+            
+            btnSend.textContent = 'ENVIANDO...';
+            btnSend.disabled = true;
+
+            try {
+                const res = await fetch(sendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]')?.value || ''
+                    },
+                    body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+                
+                if(data.success) {
+                    step1.style.display = 'none';
+                    step2.style.display = 'block';
+                } else {
+                    alert(data.message || 'Erro ao enviar.');
+                }
+            } catch (e) {
+                alert('Erro de conexão.');
+            }
+            btnSend.textContent = 'ENVIAR CÓDIGO';
+            btnSend.disabled = false;
+        });
+
+        btnVerify?.addEventListener('click', async () => {
+            const email = emailInp.value;
+            const code = codeInp.value;
+            if(code.length !== 6) return alert('Código deve ter 6 dígitos.');
+            
+            btnVerify.textContent = 'VALIDANDO...';
+            btnVerify.disabled = true;
+            otpError.style.display = 'none';
+
+            try {
+                const res = await fetch(verifyUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]')?.value || ''
+                    },
+                    body: JSON.stringify({ email, code })
+                });
+                const data = await res.json();
+                
+                if(data.success) {
+                    btnVerify.textContent = 'SUCESSO! REDIRECIONANDO...';
+                    window.location.href = data.redirect;
+                } else {
+                    otpError.textContent = data.message || 'Código inválido.';
+                    otpError.style.display = 'block';
+                    btnVerify.textContent = 'CONFIRMAR CÓDIGO';
+                    btnVerify.disabled = false;
+                }
+            } catch (e) {
+                otpError.textContent = 'Erro de conexão.';
+                otpError.style.display = 'block';
+                btnVerify.textContent = 'CONFIRMAR CÓDIGO';
+                btnVerify.disabled = false;
+            }
+        });
+    }
+
 });
