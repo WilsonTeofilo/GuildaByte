@@ -16,6 +16,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('throttle:login')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+    
+    // OTP / Magic Link
+    Route::post('/login/otp/send', [AuthController::class, 'sendOtp'])->name('otp.send');
+    Route::post('/login/otp/verify', [AuthController::class, 'verifyOtp'])->name('otp.verify');
 });
 
 // ── Área do Cliente ────────────────────────────────────────────

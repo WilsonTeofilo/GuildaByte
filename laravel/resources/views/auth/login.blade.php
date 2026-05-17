@@ -53,12 +53,13 @@
         </div>
         @endif
 
-        <form method="post" action="{{ route('login') }}" data-auth-form="login">
+        <!-- LOGIN TRADICIONAL -->
+        <form id="formLoginDefault" method="post" action="{{ route('login') }}" data-auth-form="login">
           @csrf
           <div class="field-group">
             <label class="field-label" for="email">&#9654; EMAIL / LOGIN</label>
             <div class="input-wrapper">
-              <input class="pixel-input" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required value="{{ old('email') }}">
+              <input class="pixel-input" id="email" name="email" type="email" placeholder="seuemail@exemplo.com" value="{{ old('email') }}" autocomplete="username" required autofocus>
               <span class="input-icon">@</span>
             </div>
             @error('email')
@@ -66,7 +67,7 @@
             @enderror
           </div>
 
-          <div class="field-group">
+          <div class="field-group" style="margin-bottom: 24px;">
             <label class="field-label" for="password-login">&#9654; SENHA</label>
             <div class="input-wrapper">
               <input class="pixel-input" id="password-login" name="password" type="password" placeholder="********" autocomplete="current-password" required>
@@ -78,6 +79,34 @@
           </div>
           <button class="px-btn" type="submit">ENTRAR NO SISTEMA</button>
         </form>
+
+        <!-- LOGIN OTP (Escondido por padrão) -->
+        <form id="formLoginOtp" style="display: none;" onsubmit="event.preventDefault(); return false;">
+          <div class="field-group" id="otpStep1">
+            <label class="field-label" for="otpEmail">&#9654; EMAIL CADASTRADO</label>
+            <div class="input-wrapper">
+              <input class="pixel-input" id="otpEmail" type="email" placeholder="seuemail@exemplo.com" required>
+              <span class="input-icon">@</span>
+            </div>
+            <button class="px-btn" type="button" id="btnSendOtp" style="margin-top: 24px; background: var(--gb-purple); color: #fff;">ENVIAR CÓDIGO (MAGIA)</button>
+          </div>
+
+          <div class="field-group" id="otpStep2" style="display: none;">
+            <label class="field-label" style="color: var(--gb-green);" for="otpCode">&#9654; CÓDIGO RECEBIDO (6 DÍGITOS)</label>
+            <p style="font-size: 11px; color: var(--gb-muted); margin-bottom: 10px;">Verifique seu e-mail. Expira em 3 min.</p>
+            <div class="input-wrapper">
+              <input class="pixel-input" id="otpCode" type="text" maxlength="6" style="text-align: center; font-size: 24px; letter-spacing: 10px; font-family: monospace; color: var(--gb-green);" placeholder="000000" required>
+            </div>
+            <div id="otpError" style="color: var(--gb-danger); font-size: 11px; margin-top: 5px; display: none;"></div>
+            <button class="px-btn" type="button" id="btnVerifyOtp" style="margin-top: 24px; background: var(--gb-green); color: var(--gb-bg);">CONFIRMAR CÓDIGO</button>
+          </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <button type="button" id="toggleAuthMode" style="background: transparent; border: 1px dashed var(--gb-purple); color: var(--gb-purple-light); padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 8px; cursor: pointer; border-radius: 4px; transition: all 0.2s;">
+                [ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]
+            </button>
+        </div>
 
         <div class="divider-row">
           <div class="divider-line"></div>
@@ -101,6 +130,111 @@
         </div>
       </div>
     </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const btnToggle = document.getElementById('toggleAuthMode');
+          const formDefault = document.getElementById('formLoginDefault');
+          const formOtp = document.getElementById('formLoginOtp');
+          
+          let isOtpMode = false;
+          
+          btnToggle.addEventListener('click', () => {
+              isOtpMode = !isOtpMode;
+              if (isOtpMode) {
+                  formDefault.style.display = 'none';
+                  formOtp.style.display = 'block';
+                  btnToggle.textContent = '[ ALTERNAR PARA LOGIN COM SENHA ]';
+                  btnToggle.style.borderColor = 'var(--gb-green)';
+                  btnToggle.style.color = 'var(--gb-green)';
+              } else {
+                  formDefault.style.display = 'block';
+                  formOtp.style.display = 'none';
+                  btnToggle.textContent = '[ ALTERNAR PARA LOGIN SEM SENHA (OTP) ]';
+                  btnToggle.style.borderColor = 'var(--gb-purple)';
+                  btnToggle.style.color = 'var(--gb-purple-light)';
+              }
+          });
+
+          // Lógica OTP via Fetch API
+          const btnSend = document.getElementById('btnSendOtp');
+          const btnVerify = document.getElementById('btnVerifyOtp');
+          const emailInput = document.getElementById('otpEmail');
+          const codeInput = document.getElementById('otpCode');
+          const step1 = document.getElementById('otpStep1');
+          const step2 = document.getElementById('otpStep2');
+          const otpError = document.getElementById('otpError');
+
+          btnSend.addEventListener('click', async () => {
+              const email = emailInput.value;
+              if(!email) return alert('Digite o email!');
+              
+              btnSend.textContent = 'CONJURANDO...';
+              btnSend.disabled = true;
+
+              try {
+                  const res = await fetch('{{ route("otp.send") }}', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json',
+                          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                      },
+                      body: JSON.stringify({ email })
+                  });
+                  const data = await res.json();
+                  
+                  if(data.success) {
+                      step1.style.display = 'none';
+                      step2.style.display = 'block';
+                  } else {
+                      alert(data.message || 'Erro ao enviar.');
+                  }
+              } catch (e) {
+                  alert('Erro de conexão.');
+              }
+              btnSend.textContent = 'ENVIAR CÓDIGO (MAGIA)';
+              btnSend.disabled = false;
+          });
+
+          btnVerify.addEventListener('click', async () => {
+              const email = emailInput.value;
+              const code = codeInput.value;
+              if(code.length !== 6) return alert('Código deve ter 6 dígitos.');
+              
+              btnVerify.textContent = 'VALIDANDO...';
+              btnVerify.disabled = true;
+              otpError.style.display = 'none';
+
+              try {
+                  const res = await fetch('{{ route("otp.verify") }}', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json',
+                          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                      },
+                      body: JSON.stringify({ email, code })
+                  });
+                  const data = await res.json();
+                  
+                  if(data.success) {
+                      btnVerify.textContent = 'SUCESSO! REDIRECIONANDO...';
+                      window.location.href = data.redirect;
+                  } else {
+                      otpError.textContent = data.message || 'Código inválido.';
+                      otpError.style.display = 'block';
+                      btnVerify.textContent = 'CONFIRMAR CÓDIGO';
+                      btnVerify.disabled = false;
+                  }
+              } catch (e) {
+                  otpError.textContent = 'Erro de conexão.';
+                  otpError.style.display = 'block';
+                  btnVerify.textContent = 'CONFIRMAR CÓDIGO';
+                  btnVerify.disabled = false;
+              }
+          });
+      });
+    </script>
   </main>
 </body>
 </html>

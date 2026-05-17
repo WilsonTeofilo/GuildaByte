@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Auth\RegisterClient;
+use App\Actions\Auth\SendOtpAction;
+use App\Actions\Auth\VerifyOtpAction;
+use App\Models\User;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterClientRequest;
 use Illuminate\Http\RedirectResponse;
@@ -60,5 +63,46 @@ class AuthController extends Controller
         $key = session('selected_plan');
 
         return $key ? (config('landing.plans')[$key] ?? null) : null;
+    }
+
+    // --- OTP MAGIC LINK ---
+
+    public function sendOtp(Request $request)
+    {
+        $request->validate(['email' => 'required|email|exists:users,email']);
+        
+        try {
+            SendOtpAction::run($request->email);
+            return response()->json(['success' => true]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Erro ao enviar código.'], 500);
+        }
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'code'  => 'required|string|size:6',
+        ]);
+
+        try {
+            VerifyOtpAction::run($request->email, $request->code);
+            
+            $user = User::where('email', $request->email)->first();
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return response()->json([
+                'success' => true, 
+                'redirect' => $user->isAdmin() ? route('admin.dashboard') : route('client.dashboard')
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['success' => false, 'message' => $e->validator->errors()->first('otp')], 422);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Erro ao validar código.'], 500);
+        }
     }
 }
