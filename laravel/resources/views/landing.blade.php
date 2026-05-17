@@ -22,20 +22,20 @@
   {{-- ===== SCHEMA.ORG (Ranqueamento Google Negócio Local) ===== --}}
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@@context": "https://schema.org",
+    "@@type": "ProfessionalService",
     "name": "GuildaByte",
     "description": "Agência especializada em criação de sites, lojas virtuais e sistemas para pequenos negócios como barbearias, fotógrafos, confeitarias e prestadores de serviço.",
     "url": "{{ config('app.url') }}",
     "serviceArea": { "@type": "Country", "name": "Brasil" },
     "priceRange": "R$1.000 - R$4.000",
     "hasOfferCatalog": {
-      "@type": "OfferCatalog",
+      "@@type": "OfferCatalog",
       "name": "Pacotes GuildaByte",
       "itemListElement": [
-        { "@type": "Offer", "name": "Landing Page Start", "description": "Site profissional de uma página com SEO e hospedagem", "price": "1000", "priceCurrency": "BRL" },
-        { "@type": "Offer", "name": "Sistema Core",        "description": "Sistema completo com painel administrativo, cadastros e automações", "price": "3000", "priceCurrency": "BRL" },
-        { "@type": "Offer", "name": "Sistema Custom",      "description": "Solução personalizada com integrações avançadas e múltiplos módulos", "price": "4000", "priceCurrency": "BRL" }
+        { "@@type": "Offer", "name": "Landing Page Start", "description": "Site profissional de uma página com SEO e hospedagem", "price": "1000", "priceCurrency": "BRL" },
+        { "@@type": "Offer", "name": "Sistema Core",        "description": "Sistema completo com painel administrativo, cadastros e automações", "price": "3000", "priceCurrency": "BRL" },
+        { "@@type": "Offer", "name": "Sistema Custom",      "description": "Solução personalizada com integrações avançadas e múltiplos módulos", "price": "4000", "priceCurrency": "BRL" }
       ]
     }
   }
