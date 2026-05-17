@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gb-bg: #050507;
+  --color-gb-bg-soft: #0c0c12;
+  --color-gb-panel: #13131c;
+  --color-gb-panel-2: #1b1a26;
+  --color-gb-text: #f6f4ff;
+  --color-gb-muted: #aaa4bc;
+  --color-gb-purple: #7f77dd;
+  --color-gb-purple-2: #534ab7;
+  --color-gb-purple-3: #afa9ec;
+  --color-gb-purple-dark: #3c3489;
+  --color-gb-purple-deep: #26215c;
+  --color-gb-green: #92ffcb;
+  --color-gb-cyan: #78d8ff;
+  --color-gb-danger: #ff7893;
+  --color-gb-line: rgba(255, 255, 255, 0.1);
+
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-pixel: 'Pixelify Sans', 'Inter', sans-serif;
+  --font-grotesk: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-gb-bg text-gb-text font-inter;
+  }
+}
+
+/* 
+  Aqui manteremos APENAS as classes super complexas 
+  que não compensam usar Tailwind Inline (efeitos pixelados, scrollbars customizadas, etc)
+*/
+
+.pixel-bg {
+  background:
+    linear-gradient(rgba(127, 119, 221, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 119, 221, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, var(--color-gb-bg) 0%, #090811 52%, var(--color-gb-bg) 100%);
+  background-size: 32px 32px, 32px 32px, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='0' y='0' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='8' y='8' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='0' y='4' width='4' height='8' fill='%237F77DD'/%3E%3C/svg%3E") 0 0, auto;
+}

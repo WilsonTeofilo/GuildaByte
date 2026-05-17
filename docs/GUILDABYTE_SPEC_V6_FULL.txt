@@ -1,0 +1,44 @@
+GUILDABYTE - ESPECIFICACAO COMPLETA V6
+========================================
+Documento de referencia oficial consolidado.
+Gerado em: 2026-05-14
+Autor: Wilson (Admin Root / Fundador)
+
+Este documento consolida TODA a especificacao funcional,
+regras de negocio, arquitetura, UI/UX, seguranca e ordem
+de implementacao da plataforma GuildaByte.
+
+Para a analise detalhada de cada secao contra o codigo atual,
+consultar os artefatos de auditoria gerados na conversa
+010fbc9a-32fe-4f20-bf4c-71bcd6f1debe.
+
+CONTEUDO PRINCIPAL:
+- Visao geral e principios (doc v6.0 base)
+- Admin Root: dashboard, financeiro, pacotes, promocoes, campanhas
+- Versionamento de pacotes e snapshots de preco
+- Regras financeiras: taxa 20%, comissao, protecao de valor acordado
+- Fluxo comercial completo (18 etapas)
+- Area do cliente MVP (Missao 6) - todas as fases e telas
+- Guilda Board com chat, voz e tela
+- Ranking e premiacoes configuraveis
+- Suporte e manutencao
+- Incidentes
+- Contratos, aditivos e disputas
+- LGPD e privacidade
+- Seguranca profunda (Missao 16)
+- UI/UX referencias (Linear, Stripe, Notion, ClickUp, Typeform)
+- Mobile-first
+- Ordem de implementacao por missoes
+
+NOTA: O conteudo completo foi fornecido inline pelo fundador
+e esta preservado nos logs da conversa. Este arquivo serve
+como indice e referencia rapida.
+
+REGRAS DE OURO:
+1. Pacote tem preco atual. Projeto tem preco acordado.
+2. Promocao so afeta novos pedidos.
+3. Comissao usa preco acordado.
+4. Alteracao em projeto existente so por aditivo e log.
+5. Token usado morre. Token novo invalida antigo.
+6. Senha trocada mata sessoes antigas.
+7. Front-end encanta. Backend decide. Banco registra. Auditoria prova.

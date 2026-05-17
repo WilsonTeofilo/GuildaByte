@@ -1,0 +1,152 @@
+:root {
+  --bg: #050507;
+  --bg-soft: #0c0c12;
+  --panel: #13131c;
+  --panel-2: #1b1a26;
+  --text: #f6f4ff;
+  --muted: #aaa4bc;
+  --line: rgba(255, 255, 255, 0.1);
+  --purple: #7f77dd;
+  --purple-2: #534ab7;
+  --purple-3: #afa9ec;
+  --purple-dark: #3c3489;
+  --purple-deep: #26215c;
+  --green: #92ffcb;
+  --cyan: #78d8ff;
+  --danger: #ff7893;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+  background:
+    linear-gradient(rgba(127, 119, 221, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 119, 221, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, #050507 0%, #090811 52%, #050507 100%);
+  background-size: 32px 32px, 32px 32px, auto;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='0' y='0' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='8' y='8' width='4' height='4' fill='%237F77DD'/%3E%3Crect x='0' y='4' width='4' height='8' fill='%237F77DD'/%3E%3C/svg%3E") 0 0, auto;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+body::after {
+  content: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pixel-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.78), transparent 75%);
+  pointer-events: none;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  align-content: center;
+  background: #050507;
+  pointer-events: none;
+  transition: opacity 650ms ease, visibility 650ms ease;
+}
+
+.loader.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.loader-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  font-family: "Pixelify Sans", Inter, sans-serif;
+  font-size: 28px;
+}
+
+.loader-mage {
+  display: block;
+  width: min(190px, 48vw);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 22px rgba(146, 255, 203, 0.24)) drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
+}
+
+.loader-logo span {
+  width: 22px;
+  height: 22px;
+  background:
+    linear-gradient(var(--purple) 0 0) 0 0 / 8px 8px no-repeat,
+    linear-gradient(var(--purple-3) 0 0) 8px 8px / 8px 8px no-repeat,
+    linear-gradient(var(--purple-2) 0 0) 16px 16px / 8px 8px no-repeat;
+  animation: pixelBlink 0.9s steps(2, end) infinite;
+}
+
+.loader-track {
+  overflow: hidden;
+  width: min(260px, calc(100vw - 48px));
+  height: 8px;
+  border: 1px solid var(--purple-deep);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.loader-track span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple-2), var(--purple-3), var(--green));
+  animation: loadingSweep 1s ease-in-out infinite;
+}
+
+@keyframes loadingSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(240%); }
+}
+
+@keyframes loaderAutoHide {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes pixelBlink {
+  50% { opacity: 0.35; }
+}
+

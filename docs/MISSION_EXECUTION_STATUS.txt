@@ -1,0 +1,217 @@
+GUILDABYTE - STATUS DE EXECUCAO DAS MISSOES
+
+Atualizado em 2026-05-14
+
+Estado geral
+O legado PHP continua preservado em /Cliente e /src.
+A nova base oficial esta em /laravel com Laravel + PostgreSQL + Blade + Tailwind.
+Daqui para frente, regra nova sensivel deve nascer em /laravel.
+
+MISSAO 1 - BLINDAGEM GIT/ENV
+Status: base fechada.
+
+Feito:
+- .gitignore na raiz.
+- .ignore para busca local sem vendor/node_modules/build.
+- .env.example na raiz.
+- .env.example no Laravel.
+- secrets e .env bloqueados.
+- docker-compose usando variaveis.
+
+Pendente futuro:
+- iniciar repositorio Git quando for subir ao GitHub.
+- adicionar secret scanning/pre-commit quando o repo existir.
+
+MISSAO 2 - ORGANIZACAO DA BASE ATUAL
+Status: legado organizado, transicao em andamento.
+
+Feito:
+- legado PHP separado em /Cliente e /src.
+- Laravel isolado em /laravel.
+- docs separadas em /docs.
+- banco local Postgres via Docker.
+
+Decisao:
+- nao misturar novas regras sensiveis no PHP legado.
+- migrar por fatias para Laravel.
+
+MISSAO 3 - DESIGN SYSTEM
+Status: legado tem base visual; Laravel ainda precisa receber layouts Blade.
+
+Feito no legado:
+- CSS separado por auth/shell/client/design-system.
+- assets existentes preservados.
+
+Proximo:
+- criar tokens Tailwind da GuildaByte.
+- criar layouts Blade publico/auth/cliente/interno/admin.
+- criar componentes Blade padrao.
+
+MISSAO 4 - CONFIG E BANCO
+Status: fechada para ambiente local.
+
+Feito:
+- Laravel conectado ao PostgreSQL local.
+- Postgres 16 rodando no Docker.
+- phpPgAdmin rodando.
+- config/guildabyte.php criada.
+- timezone America/Sao_Paulo.
+- sessoes em database.
+
+MISSAO 5 - AUTH ROBUSTA
+Status: fundacao de banco criada; telas/fluxos Laravel ainda pendentes.
+
+Feito:
+- users com user_type, status, phone, avatar, last_login_at, password_changed_at, token_version e soft delete.
+- roles, permissions, role_user, permission_role.
+- user_oauth_accounts.
+- action_tokens.
+- user_sessions.
+- login_logs.
+- security_events.
+- audit_logs.
+- session cookie configurado com HttpOnly e SameSite strict.
+
+Pendente:
+- controllers auth Laravel.
+- register/login/logout.
+- reset de senha com action_tokens.
+- email verification.
+- Google Auth backend.
+- middleware de permissao.
+- rate limit aplicado nas rotas.
+
+MISSAO 6 - AREA DO CLIENTE MVP
+Status: schema base iniciado; UI Laravel pendente.
+
+Feito:
+- client_profiles.
+- communication_preferences.
+- project_requests.
+- projects com snapshot financeiro.
+- project_files.
+- support_tickets.
+- maintenance_monthly_usage.
+
+Proximo:
+- layout cliente Blade/Tailwind.
+- dashboard cliente.
+- novo pedido guiado usando packages/package_versions.
+- meus projetos.
+- detalhe projeto.
+
+MISSAO 7 - ADMIN SIMPLES
+Status: pendente de UI; schema preparado parcialmente.
+
+Base disponivel:
+- packages.
+- package_versions.
+- project_requests.
+- proposals.
+- projects.
+
+Proximo:
+- tela Admin Root para pedidos.
+- criar proposta.
+- converter proposta aceita em projeto.
+
+MISSAO 8 - FINANCEIRO BLINDADO
+Status: fundacao iniciada e testada.
+
+Feito:
+- packages versionados.
+- promotions.
+- promotion_packages.
+- projects com agreed_*_cents.
+- project_financial_events.
+- payments.
+- commissions.
+- monthly_subscriptions.
+- CalculateProjectPricingSnapshot.
+- teste provando que promocao nova nao altera snapshot antigo.
+
+Proximo:
+- use cases de criar nova versao de pacote.
+- use cases de criar promocao.
+- use case de criar projeto com snapshot.
+- policy para impedir recalc automatico.
+
+MISSAO 9 - GUILDA BOARD
+Status: schema base criado.
+
+Feito:
+- boards.
+- board_columns.
+- cards.
+
+Proximo:
+- templates de board.
+- checklists, comentarios, anexos e activity logs.
+- UI Kanban.
+
+MISSAO 10 - EQUIPE/CONVITES
+Status: perfis e skills criados; convites pendentes.
+
+Feito:
+- employee_profiles.
+- skills.
+- employee_skills.
+- project_members.
+
+Pendente:
+- project_invitations.
+- aceite de convite com token uso unico.
+- limite de projetos ativos.
+
+MISSAO 11 - SUPORTE/MANUTENCAO
+Status: schema base criado.
+
+Feito:
+- support_tickets.
+- maintenance_monthly_usage.
+
+Pendente:
+- messages/attachments de suporte.
+- fluxo 48h time original.
+- mural de manutencoes.
+
+MISSAO 12 - RANKING/BONUS
+Status: schema base criado.
+
+Feito:
+- reward_events.
+- reward_event_packages.
+- reward_scores.
+- reward_winners.
+
+Pendente:
+- calculo de pontuacao.
+- tela Top 5.
+- criterios anti-fraude.
+
+MISSAO 13 - CONTRATOS/LGPD/AUDITORIA
+Status: contratos/auditoria iniciados; LGPD pendente.
+
+Feito:
+- contracts.
+- contract_acceptances.
+- scope_addendums.
+- audit_logs.
+
+Pendente:
+- privacy_consents.
+- data_subject_requests.
+- data_processing_records.
+
+MISSAO 14 - INCIDENTES
+Status: pendente.
+
+MISSAO 15 - INTEGRACOES
+Status: pendente.
+
+Regra operacional daqui para frente
+1. Nova regra sensivel nasce em Domain/Application.
+2. Controller so recebe request e chama caso de uso.
+3. Blade so exibe.
+4. Dinheiro sempre em centavos.
+5. Toda acao sensivel precisa permissao, CSRF e log.

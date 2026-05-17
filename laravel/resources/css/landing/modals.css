@@ -1,0 +1,301 @@
+.project-window {
+  position: relative;
+  width: min(860px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+}
+
+.auth-choice-window {
+  position: relative;
+  width: min(520px, 100%);
+}
+
+.project-close {
+  border: 1px solid var(--purple-deep);
+  color: var(--muted);
+  background: #08080d;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.project-close:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.project-stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background:
+    linear-gradient(rgba(127, 119, 221, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 119, 221, 0.08) 1px, transparent 1px),
+    #08080d;
+  background-size: 22px 22px;
+}
+
+.slide-scene {
+  position: absolute;
+  inset: 0;
+}
+
+.slide-ui-window {
+  position: absolute;
+  border: 2px solid var(--purple-deep);
+  background: #101018;
+  animation: floatPreview 2.6s ease-in-out infinite;
+}
+
+.slide-ui-bar {
+  height: 24px;
+  border-bottom: 2px solid var(--purple-deep);
+  background: var(--purple-2);
+}
+
+.slide-ui-line {
+  height: 10px;
+  margin: 12px;
+  background: var(--purple);
+}
+
+.slide-ui-line.short { width: 46%; background: var(--purple-deep); }
+.slide-ui-line.mid { width: 68%; background: var(--purple-3); }
+
+.slide-ui-button {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 120px;
+  height: 28px;
+  background: var(--green);
+}
+
+.slide-brand {
+  display: block;
+  margin: 38px 28px 18px;
+  color: var(--text);
+  font-family: "Pixelify Sans", Inter, sans-serif;
+  font-size: clamp(46px, 12vw, 96px);
+  line-height: 0.9;
+}
+
+.slide-grid {
+  position: absolute;
+  inset: 54px 28px 42px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.scene-menu-window {
+  left: 7%;
+  top: 10%;
+  width: 34%;
+  height: 76%;
+}
+
+.scene-menu-grid {
+  left: 47%;
+  right: 7%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.scene-cart-list {
+  left: 8%;
+  top: 12%;
+  width: 42%;
+  height: 62%;
+}
+
+.scene-cart-checkout {
+  right: 8%;
+  top: 22%;
+  width: 34%;
+  height: 54%;
+  animation-delay: 140ms;
+}
+
+.scene-admin-window {
+  left: 6%;
+  top: 10%;
+  width: 88%;
+  height: 74%;
+}
+
+.scene-admin-grid {
+  inset: 46px 18px 20px;
+  grid-template-columns: 1.1fr 0.9fr 0.9fr;
+}
+
+.scene-notify-card {
+  left: 8%;
+  top: 16%;
+  width: 42%;
+  height: 52%;
+}
+
+.scene-notify-bubble {
+  right: 8%;
+  top: 28%;
+  width: 34%;
+  height: 36%;
+  animation-delay: 200ms;
+}
+
+.scene-brand-window {
+  left: 8%;
+  top: 12%;
+  width: 84%;
+  height: 72%;
+}
+
+.scene-shop-grid {
+  inset: 44px 8% 40px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.scene-portfolio-grid {
+  inset: 40px 7% 38px;
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+}
+
+.scene-finance-main {
+  left: 6%;
+  top: 12%;
+  width: 50%;
+  height: 68%;
+}
+
+.scene-finance-side {
+  right: 7%;
+  top: 18%;
+  width: 34%;
+  height: 54%;
+  animation-delay: 160ms;
+}
+
+.slide-tile {
+  border: 2px solid var(--purple-deep);
+  background: rgba(127, 119, 221, 0.18);
+}
+
+.slide-tile:nth-child(even) {
+  background: rgba(175, 169, 236, 0.2);
+}
+
+.project-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-top: 1px solid var(--purple-deep);
+  padding: 14px;
+}
+
+.project-nav {
+  min-width: 48px;
+  min-height: 38px;
+  border: 2px solid var(--purple-deep);
+  color: var(--purple-3);
+  background: #08080d;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.project-nav:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.project-nav:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.project-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.project-dots button {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  background: var(--purple-deep);
+  cursor: pointer;
+}
+
+.project-dots button.is-active {
+  background: var(--green);
+}
+
+.project-caption,
+.auth-choice-body {
+  padding: 18px;
+}
+
+.project-caption strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.project-caption p,
+.auth-choice-body p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.auth-choice-body h2 {
+  margin-bottom: 12px;
+  font-family: "Pixelify Sans", Inter, sans-serif;
+  font-size: 46px;
+}
+
+.auth-choice-plan {
+  margin: 18px 0;
+  border: 2px solid var(--purple-deep);
+  padding: 14px;
+  color: var(--green);
+  background: rgba(127, 119, 221, 0.1);
+  font-weight: 900;
+}
+
+.auth-choice-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+
+/* -- Modal Triggers -- */
+.project-modal,
+.auth-choice-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.project-modal.is-open,
+.auth-choice-modal.is-open {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.84);
+  backdrop-filter: blur(6px);
+}
+
+/* -- Access Panel (Briefing form wrapper) -- */
+.access-panel {
+  background: rgba(5, 5, 7, 0.58);
+}

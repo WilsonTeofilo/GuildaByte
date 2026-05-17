@@ -1,0 +1,55 @@
+:root {
+  --gb-focus: #92ffcb;
+  --gb-focus-shadow: rgba(146, 255, 203, 0.22);
+  --gb-selection-bg: rgba(146, 255, 203, 0.28);
+  --gb-selection-text: #f6f4ff;
+}
+
+::selection {
+  color: var(--gb-selection-text);
+  background: var(--gb-selection-bg);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gb-focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px var(--gb-focus-shadow);
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+a[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.gb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

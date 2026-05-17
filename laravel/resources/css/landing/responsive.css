@@ -1,0 +1,703 @@
+/* ============================================================
+   GUILDABYTE — STYLES MOBILE (index / landing)
+   Cole no final do styles.css substituindo qualquer
+   @media mobile/tablet existente.
+
+   Breakpoints:
+   ≤ 1024px  Notebook compacto
+   ≤  768px  Tablet
+   ≤  560px  Mobile
+   ≤  400px  Mobile pequeno (SE, Galaxy A)
+   ============================================================ */
+
+
+/* ══════════════════════════════════════════════════════════════
+   NOTEBOOK  (≤ 1024px)
+   Grid 2col → ainda funciona, só reduz tamanhos
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  h1 { font-size: clamp(54px, 9vw, 90px); }
+  h2 { font-size: clamp(28px, 4.5vw, 52px); }
+
+  .hero-shell {
+    gap: 28px;
+    padding: 28px 0 44px;
+    grid-template-columns: 1fr minmax(300px, 0.65fr);
+  }
+
+  .hero-copy { font-size: clamp(16px, 1.8vw, 20px); }
+
+  .showcase-panel { padding: 14px; }
+
+  .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .niche-grid   { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .plans-grid   { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .timeline     { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+
+  .briefing-panel { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   TABLET  (≤ 768px)
+   Hero empilha, grids 2col, nav toggle aparece
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── header ── */
+  .site-header {
+    min-height: 66px;
+    padding: 0 18px;
+  }
+
+  .brand-avatar { width: 58px; height: 58px; }
+  .brand-name   { font-size: 20px; }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 100vh;
+    z-index: 39;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 24px 20px;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    background: rgba(5,5,9,0.97);
+    backdrop-filter: blur(22px);
+  }
+
+  .main-nav.is-open { display: flex; }
+
+  .main-nav .nav-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .main-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    border-radius: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    padding: 0 16px;
+  }
+
+  .main-nav .nav-cta {
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  /* ── hero: empilha em coluna ── */
+  .hero-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-height: unset;
+    padding: 32px 0 40px;
+  }
+
+  h1 { font-size: clamp(46px, 10vw, 72px); line-height: 0.92; }
+  h2 { font-size: clamp(26px, 5vw, 44px); }
+
+  .hero-copy { font-size: 16px; margin-bottom: 22px; }
+
+  .hero-actions { gap: 10px; }
+  .btn { min-height: 44px; font-size: 14px; padding: 0 18px; }
+
+  /* métricas: 3 col em tablet */
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .hero-metrics article { min-height: 84px; padding: 14px; }
+  .hero-metrics strong  { font-size: 22px; margin-bottom: 6px; }
+  .hero-metrics span    { font-size: 12px; }
+
+  /* showcase panel: largura total no tablet */
+  .showcase-panel { width: 100%; }
+
+  /* mini-board 3col mantida */
+  .mini-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* ── grids 2col ── */
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .niche-grid   { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .plans-grid   { grid-template-columns: 1fr; gap: 14px; max-width: 480px; margin: 0 auto; }
+  .timeline     { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .project-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  .niche-card   { min-height: auto; padding: 18px; }
+  .niche-card img { width: 64px; height: 64px; margin-bottom: 14px; }
+
+  .feature-card { min-height: auto; padding: 20px; }
+  .pixel-asset  { width: 56px; height: 56px; margin-bottom: 24px; }
+
+  .timeline article { min-height: auto; padding: 18px; }
+
+  /* briefing: coluna única */
+  .briefing-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .auth-choice-actions {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* footer */
+  .site-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 24px 0 32px;
+  }
+
+  .site-footer p { text-align: left; }
+  .footer-contact { justify-content: flex-start; }
+
+  /* section padding */
+  .section-band,
+  .plans-section,
+  .workflow-section,
+  .briefing-section,
+  .niche-section,
+  .projects-section {
+    padding: 54px 0;
+  }
+
+  .section-heading { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE  (≤ 560px)
+   Layout pensado 100% pra polegar — thumb zone, cards grandes,
+   CTAs ancorados, hierarquia tipográfica mobile-first
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 560px) {
+
+  /* ── base layout ── */
+  .hero-shell,
+  .section-band,
+  .plans-section,
+  .workflow-section,
+  .briefing-section,
+  .niche-section,
+  .projects-section {
+    width: calc(100% - 24px);
+  }
+
+  /* ── header mobile ── */
+  .site-header {
+    min-height: 58px;
+    padding: 0 14px;
+    position: sticky;
+    top: 0;
+  }
+
+  .brand-avatar { width: 48px; height: 48px; }
+  .brand-name   { font-size: 17px; }
+
+  .nav-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .main-nav { padding: 20px 16px; }
+
+  /* ── HERO ── */
+  .hero-shell {
+    gap: 0;
+    padding: 24px 0 0;
+    min-height: unset;
+  }
+
+  .hero-content { order: 1; }
+
+  .eyebrow {
+    font-size: 11px;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow span {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+  }
+
+  /* título: ocupa ~3 linhas, não 5 */
+  h1 {
+    font-size: clamp(38px, 11vw, 56px);
+    line-height: 0.94;
+    margin-bottom: 14px;
+    text-shadow: 6px 6px 0 rgba(143,114,255,0.10), 0 0 24px rgba(143,114,255,0.28);
+  }
+
+  h2 {
+    font-size: clamp(22px, 6.5vw, 34px);
+    line-height: 1;
+  }
+
+  h3 { font-size: 17px; }
+
+  .hero-copy {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #c8c3d8;
+  }
+
+  /* CTAs empilhados e grandes — thumb zone */
+  .hero-actions {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .btn {
+    width: 100%;
+    min-height: 50px;
+    font-size: 14px;
+    justify-content: center;
+    /* clip-path menor pra não cortar em telas estreitas */
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  /* métricas: 1 linha de 3 mini-cards horizontais */
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .hero-metrics article {
+    min-height: 72px;
+    padding: 12px 10px;
+    border-radius: 0;
+    /* clip-path pixel nos cards */
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  }
+
+  .hero-metrics strong {
+    font-size: 18px;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .hero-metrics span {
+    font-size: 10px;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+
+  /* ── SHOWCASE PANEL: fica ABAIXO do conteúdo, menor ── */
+  .showcase-panel {
+    order: 2;
+    width: calc(100% + 24px);
+    margin: 0 -12px;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding: 14px 14px 20px;
+    /* sem o ::after glow que estoura em mobile */
+  }
+
+  .showcase-panel::after { display: none; }
+
+  .panel-topline { font-size: 11px; margin-bottom: 12px; }
+  .status-dot    { width: 8px; height: 8px; }
+
+  .device-card { padding: 14px; border-radius: 10px; }
+
+  .screen-header span  { font-size: 12px; }
+  .screen-header strong { font-size: 22px; }
+
+  .quest-card {
+    grid-template-columns: 44px 1fr;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+
+  .quest-icon   { width: 44px; height: 44px; font-size: 26px; }
+  .quest-card strong { font-size: 15px; margin-bottom: 3px; }
+  .quest-card p { font-size: 12px; }
+
+  .progress-wrap { margin-bottom: 14px; }
+  .progress-label span  { font-size: 12px; }
+  .progress-label strong { font-size: 20px; }
+  .progress-track { height: 10px; margin-top: 8px; }
+
+  /* mini-board: 3 botões lado a lado, mais compactos */
+  .mini-board { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+
+  .board-card {
+    min-height: 72px;
+    padding: 10px 8px;
+    font-size: 12px;
+    border-radius: 0;
+  }
+
+  .board-card span { font-size: 14px; margin-bottom: 10px; }
+
+  /* ── TICKER ── */
+  .ticker { padding: 10px 0; }
+  .ticker-inner { font-size: 10px; gap: 20px; }
+
+  /* ── SECTION BAND (O que resolvemos) ── */
+  .section-band,
+  .plans-section,
+  .workflow-section,
+  .briefing-section,
+  .niche-section,
+  .projects-section {
+    padding: 44px 0;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  /* features: 1 col, cards horizontais com ícone na lateral */
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .feature-card {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    align-items: start;
+    min-height: unset;
+    padding: 16px;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .pixel-asset {
+    grid-row: 1 / 3;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 0;
+    align-self: center;
+  }
+
+  .feature-card h3 { font-size: 15px; margin-bottom: 6px; align-self: end; }
+  .feature-card p  { font-size: 13px; line-height: 1.5; margin: 0; color: var(--muted); }
+
+  /* ── NICHOS: 2 col compacto ── */
+  .niche-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .niche-card {
+    min-height: unset;
+    padding: 16px 14px;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    text-align: center;
+  }
+
+  .niche-card img {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 12px;
+  }
+
+  .niche-card strong { font-size: 15px; margin-bottom: 6px; }
+  .niche-card p      { font-size: 12px; line-height: 1.4; }
+
+  /* ── PLANOS: 1 col, cards full-width, CTA sticky no rodapé ── */
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .plan-card {
+    min-height: unset;
+    padding: 18px 16px;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .plan-head { margin-bottom: 14px; gap: 10px; }
+  .plan-head span  { font-size: 26px; }
+  .plan-head strong { font-size: 20px; }
+
+  .plan-card p  { font-size: 13px; }
+  .plan-card ul { gap: 10px; margin: 14px 0 18px; }
+  .plan-card li { font-size: 13px; }
+
+  .badge {
+    font-size: 10px;
+    padding: 5px 9px;
+    margin-bottom: 12px;
+  }
+
+  .plan-select {
+    min-height: 48px;
+    font-size: 14px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  /* ── PROJETOS: 1 col ── */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .project-card {
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .project-titlebar { padding: 8px 10px; }
+  .project-titlebar strong { font-size: 10px; }
+  .project-dot { width: 7px; height: 7px; }
+
+  /* preview com aspect-ratio menor pra não ocupar meia tela */
+  .project-preview { aspect-ratio: 16 / 7; }
+
+  .project-body { padding: 14px; }
+  .project-body h3 { font-size: 22px; margin-bottom: 6px; }
+  .project-body p  { font-size: 13px; }
+
+  .project-tags { gap: 6px; margin: 12px 0; }
+  .project-tags span { font-size: 10px; padding: 4px 7px; }
+
+  .project-button { min-height: 46px; font-size: 13px; }
+
+  /* ── TIMELINE (Como funciona): 1 col ── */
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .timeline article {
+    min-height: unset;
+    padding: 16px;
+    border-radius: 0;
+    /* conector visual entre steps */
+    border-bottom: none;
+    border-left: 3px solid var(--purple-deep);
+    border-right: none;
+    margin-left: 20px;
+    position: relative;
+  }
+
+  .timeline article:last-child {
+    border-left-color: var(--green);
+  }
+
+  /* número como bolinha na lateral esquerda */
+  .timeline span {
+    position: absolute;
+    left: -32px;
+    top: 16px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-radius: 0;
+    margin-bottom: 0;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  }
+
+  .timeline h3 { font-size: 15px; margin-bottom: 6px; }
+  .timeline p  { font-size: 13px; }
+
+  /* ── BRIEFING / CTA FINAL ── */
+  .briefing-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px 16px;
+    border-radius: 0;
+    clip-path: none;
+    background:
+      linear-gradient(135deg, rgba(143,114,255,0.1), transparent 40%),
+      rgba(255,255,255,0.055);
+  }
+
+  .briefing-copy { padding: 0; }
+  .briefing-copy h2 { font-size: clamp(24px, 7vw, 36px); margin-bottom: 12px; }
+  .briefing-copy p  { font-size: 14px; line-height: 1.55; }
+
+  .selected-plan { margin-top: 18px; padding: 14px; }
+  .selected-plan strong { font-size: 18px; }
+
+  /* flow-steps: lista compacta */
+  .briefing-form {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 10px;
+    align-items: start;
+  }
+
+  .flow-step .numeric {
+    font-size: 13px;
+    color: var(--purple-3);
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .flow-step strong { font-size: 14px; display: block; margin-bottom: 2px; }
+  .flow-step p      { font-size: 12px; color: var(--muted); margin: 0; grid-column: 2; }
+
+  /* CTAs do briefing: empilhados, full-width */
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .form-submit {
+    width: 100%;
+    min-height: 50px;
+    font-size: 14px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  /* ── MODAL PROJETO ── */
+  .project-modal { padding: 8px; align-items: flex-end; }
+
+  .project-window {
+    width: 100%;
+    max-height: 88vh;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .project-stage { aspect-ratio: 4 / 3; }
+
+  .project-controls { padding: 10px 14px; gap: 10px; }
+  .project-nav  { min-width: 40px; min-height: 34px; font-size: 13px; }
+  .project-caption { padding: 12px 14px; }
+  .project-caption strong { font-size: 12px; }
+  .project-caption p      { font-size: 13px; }
+
+  /* ── MODAL AUTH CHOICE ── */
+  .auth-choice-modal { padding: 8px; align-items: flex-end; }
+
+  .auth-choice-window {
+    width: 100%;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .auth-choice-body { padding: 16px 14px; }
+  .auth-choice-body h2 { font-size: 30px; margin-bottom: 10px; }
+  .auth-choice-body p  { font-size: 13px; }
+  .auth-choice-plan    { margin: 14px 0; padding: 12px; font-size: 14px; }
+
+  .auth-choice-actions {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 22px 0 28px;
+  }
+
+  .site-footer span { font-size: 22px; }
+  .site-footer p    { font-size: 13px; text-align: left; max-width: 100%; }
+
+  .footer-contact {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-contact a {
+    font-size: 12px;
+    padding: 8px 11px;
+  }
+
+  /* ── LOADER mobile ── */
+  .loader-mage {
+    width: min(140px, 38vw);
+  }
+
+  .loader-logo { font-size: 22px; gap: 8px; }
+  .loader-track { width: min(220px, calc(100vw - 40px)); }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE PEQUENO  (≤ 400px)
+   iPhone SE, Galaxy A, telas 360–400px
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+
+  h1 { font-size: clamp(32px, 10vw, 44px); }
+  h2 { font-size: clamp(20px, 6vw, 28px); }
+
+  .hero-shell,
+  .section-band,
+  .plans-section,
+  .workflow-section,
+  .briefing-section,
+  .niche-section,
+  .projects-section {
+    width: calc(100% - 20px);
+  }
+
+  .hero-metrics article { padding: 10px 8px; }
+  .hero-metrics strong  { font-size: 16px; }
+  .hero-metrics span    { font-size: 9px; }
+
+  .btn { min-height: 48px; font-size: 13px; }
+
+  .feature-card { grid-template-columns: 44px 1fr; column-gap: 12px; }
+  .pixel-asset  { width: 44px; height: 44px; }
+
+  .niche-card strong { font-size: 14px; }
+  .niche-card p      { font-size: 11px; }
+  .niche-card img    { width: 44px; height: 44px; }
+
+  .plan-head span  { font-size: 22px; }
+  .plan-head strong { font-size: 17px; }
+
+  .project-body h3 { font-size: 20px; }
+
+  .timeline article { margin-left: 16px; }
+  .timeline span    { left: -28px; width: 28px; height: 28px; font-size: 12px; }
+
+  .briefing-copy h2 { font-size: clamp(20px, 7vw, 28px); }
+
+  .site-footer span { font-size: 20px; }
+}

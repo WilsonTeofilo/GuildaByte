@@ -1,0 +1,6 @@
+GUILDABYTE - DOCUMENTACAO GERAL DO SISTEMA
+VERSAO 6.0 - TXT SIMPLES PARA IA E DESENVOLVIMENTO
+Documento de referencia oficial. Salvo em 2026-05-14.
+Conteudo completo fornecido pelo fundador (Wilson / Admin Root).
+Ver analise comparativa com o codigo atual em:
+  artifacts/doc_v6_vs_codebase.md

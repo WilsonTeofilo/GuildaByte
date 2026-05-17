@@ -1,0 +1,783 @@
+GUILDABYTE - MISSOES DE ARQUITETURA
+
+Objetivo:
+Construir a GuildaByte por missoes pequenas, testaveis e seguras.
+Nada de monolito baguncado. Nada de regra importante no front-end.
+
+PRINCIPIOS OBRIGATORIOS
+
+1. Front-end impecavel, mas nunca soberano
+O front-end precisa ser bonito, polido, responsivo, claro e profissional.
+Mas front-end nao decide preco, permissao, comissao, status financeiro, limite, desconto, aceite ou regra sensivel.
+
+Regra:
+Todo dado importante vem do backend.
+Todo calculo importante acontece no backend.
+Toda permissao e validada no backend.
+Todo valor financeiro e recalculado/conferido no backend.
+Todo input do usuario e tratado como suspeito.
+
+2. Backend como fonte da verdade
+O navegador pode mostrar, sugerir, filtrar e melhorar experiencia.
+Mas quem valida e confirma e sempre o servidor.
+
+3. Anti monolito
+Separar:
+- interface
+- controller
+- caso de uso
+- regra de dominio
+- repositorio/banco
+- integracao externa
+
+4. Codigo legado compreensivel
+Uma pessoa nova deve abrir o projeto e entender:
+- onde fica tela
+- onde fica regra
+- onde fica banco
+- onde fica configuracao
+- onde fica seguranca
+- onde fica integracao
+
+5. GitHub blindado
+Nunca commitar:
+- .env
+- token
+- chave privada
+- dump real
+- arquivo real de cliente
+- backup real
+- credencial
+
+MISSAO 1 - BLINDAGEM DO GIT E DO AMBIENTE
+
+Objetivo:
+Impedir vazamento antes de qualquer crescimento.
+
+Fase 1.1 - Arquivos de seguranca
+- Criar .gitignore.
+- Bloquear .env e .env.*.
+- Permitir somente .env.example.
+- Bloquear dumps, backups, storage, uploads, logs e credenciais.
+
+Fase 1.2 - Exemplo de ambiente
+- Criar .env.example sem segredo real.
+- Deixar variaveis esperadas para app, banco, email, WhatsApp e pagamento.
+
+Fase 1.3 - Checklist antes de commit
+- Rodar busca por segredos.
+- Conferir git status.
+- Conferir se nao existe .env trackeado.
+- Conferir se nao tem dump real.
+
+Fase 1.4 - Padrao de commit
+- feat: funcionalidade nova.
+- fix: correcao.
+- refactor: melhoria interna.
+- security: seguranca.
+- docs: documentacao.
+- chore: manutencao.
+
+Status:
+- .gitignore criado.
+- .env.example criado.
+
+MISSAO 2 - ORGANIZACAO DA BASE ATUAL
+
+Objetivo:
+Arrumar o PHP atual sem tentar virar Laravel do nada.
+
+Status:
+- Conteudo comercial separado em src/Content.
+- Helpers em src/Support.
+- Layout compartilhado criado em src/View/layouts.
+- Componentes visuais criados em src/View/components.
+- Areas iniciais criadas em Cliente/cliente, Cliente/app e Cliente/admin.
+- CSS/JS compartilhado das areas criado em Cliente/style/shell.css e Cliente/js/shell.js.
+
+Fase 2.1 - Separar conteudo da tela
+- Conteudo comercial fica em src/Content.
+- HTML fica na entrada publica.
+- Helper fica em src/Support.
+
+Fase 2.2 - Corrigir caminhos
+- Asset sempre via helper.
+- CSS sempre via helper.
+- JS sempre via helper.
+- Nada de caminho absoluto quebravel tipo /assets se o projeto rodar em subpasta.
+
+Fase 2.3 - Separar areas
+Estrutura visual alvo:
+- publico
+- auth
+- cliente
+- interno
+- admin root
+
+Fase 2.4 - Criar componentes visuais padrao
+- janela OS
+- card
+- botao
+- modal
+- tabela
+- tabs
+- alerta
+- estado vazio
+- estado loading
+- estado erro
+- estado sem permissao
+
+Regra:
+O front-end deve ser impecavel, mas sem esconder bagunca de arquitetura.
+
+MISSAO 3 - DESIGN SYSTEM E FRONT-END IMPECAVEL
+
+Objetivo:
+Criar uma interface bonita, consistente e facil de manter.
+
+Status:
+- CSS base compartilhado criado em Cliente/style/design-system.css.
+- Foco visivel, selecao, disabled e reduced-motion padronizados.
+- Layouts publico, auth, cliente, interno e admin root existem.
+- Componentes de janela, card, botao, modal, tabela, tabs, alerta e estado vazio existem.
+- Estados de loading, erro e sem permissao existem como componentes.
+- HeaderTrans.png substitui o antigo simbolo desenhado em CSS.
+- mobile.css removido; responsividade fica nos CSS de cada area para evitar override monolitico.
+- Tabs receberam ARIA basico e JS sem regra sensivel.
+- Front-end continua limitado a preview/estado de interface.
+- Missao concluida como base de design system. Polimentos futuros entram por tela/feature.
+
+Fase 3.1 - Base visual
+- Dark SaaS.
+- Pixel/RPG com controle.
+- Roxo como marca.
+- Verde neon para acao/status.
+- Cards com raio controlado.
+- Componentes densos no admin.
+- Cliente com fluxo simples.
+
+Fase 3.2 - Layouts por area
+- layout publico
+- layout auth
+- layout cliente
+- layout interno
+- layout admin root
+
+Fase 3.3 - Responsividade
+- Mobile-first para cliente.
+- Desktop denso para admin.
+- Sem texto vazando.
+- Sem botao quebrado.
+- Sem sobreposicao.
+
+Fase 3.4 - Acessibilidade minima
+- Labels reais.
+- Foco visivel.
+- Contraste bom.
+- Estados de erro claros.
+- Modal com fechamento e foco coerente.
+
+Fase 3.5 - Front-end sem regra sensivel
+Proibido confiar em:
+- preco vindo do JS
+- desconto vindo do JS
+- permissao escondida por CSS
+- user_type vindo do localStorage
+- status financeiro vindo do navegador
+- limite de suporte calculado no front
+- comissao calculada no front
+
+Permitido no front:
+- preview visual
+- mascara de telefone
+- feedback de campo
+- filtro de tabela
+- ordenacao visual
+- estado temporario de UI
+
+Obrigatorio no backend:
+- validar pacote
+- validar preco
+- validar promocao
+- validar permissao
+- validar aceite
+- validar pagamento
+- validar comissao
+- validar upload
+- validar CSRF
+
+MISSAO 4 - CONFIGURACAO E BANCO COM SEGURANCA
+
+Objetivo:
+Conectar o app ao banco sem espalhar conexao e SQL pelo projeto.
+
+Status:
+- Bootstrap central criado em src/bootstrap.php.
+- Leitor de .env criado em src/Config/Env.php.
+- Config de app e banco criada em src/Config.
+- Conexao PDO criada em src/Database/Connection.php.
+- Excecao de banco criada sem expor segredo.
+- Repositorios base criados em src/Repositories.
+- Repositorios iniciais criados: User, Package, ProjectRequest, Project, Proposal, FinancialEvent.
+- Healthcheck local criado em Cliente/healthcheck.php.
+- SQL do healthcheck isolado em src/Application/System/HealthcheckService.php.
+- Entradas publicas carregam bootstrap, nao helpers soltos.
+- Healthcheck validado em 2026-05-14: database connected, 79 tabelas, repositorios prontos.
+- Missao 4 fechada como base segura. Ajustes futuros entram como feature/migracao, nao como SQL solto em tela.
+
+Fase 4.1 - Config
+- Criar leitor de .env.
+- Criar config de app.
+- Criar config de database.
+- Nunca hardcodar senha no codigo.
+
+Fase 4.2 - Conexao
+- Criar Database/Connection.
+- Usar PDO.
+- Usar prepared statements.
+- Definir charset utf8mb4.
+- Tratar erro sem mostrar segredo.
+
+Fase 4.3 - Repositorios
+- UserRepository.
+- PackageRepository.
+- ProjectRequestRepository.
+- ProjectRepository.
+- ProposalRepository.
+- FinancialEventRepository.
+
+Fase 4.4 - Healthcheck local
+- Testar conexao.
+- Testar leitura simples.
+- Nao expor detalhes sensiveis em producao.
+
+Regra:
+Nenhum arquivo de tela faz SQL direto.
+
+MISSAO 5 - AUTENTICACAO REAL E SEGURA
+
+Objetivo:
+Transformar login/cadastro visual em autenticacao real, segura, auditavel e resistente a ataques comuns.
+
+Status:
+- Missao iniciada.
+- Cadastro publico agora faz POST real com CSRF.
+- Login agora faz POST real com CSRF.
+- Senha usa password_hash/password_verify.
+- Email e normalizado no backend.
+- Erro de login e generico para evitar enumeracao.
+- Sessao usa cookie HttpOnly, SameSite=Lax e Secure em producao.
+- session_id e regenerado no login.
+- Areas cliente, interno e admin exigem middleware backend.
+- Logout real criado em Cliente/logout.php.
+- login_logs, security_events, user_sessions e auth_rate_limits integrados.
+- password_reset_tokens e user_oauth_accounts previstos no schema.
+- Recuperacao de senha, verificacao de email, 2FA e Google OAuth ainda nao estao expostos em tela.
+- Recuperacao de senha criada com token forte, hash no banco, expiracao e uso unico.
+- Verificacao de email criada com token forte, hash no banco e outbox local de desenvolvimento.
+- Alteracao de senha logado criada exigindo senha atual e revogando outras sessoes.
+- Reset de acesso por Admin Root criado sem admin ver senha.
+- Google OAuth previsto com guard backend para issuer/audience/exp/email_verified/sub.
+- 2FA previsto no schema para areas sensiveis.
+
+Fase 5.1 - Cadastro
+- Validar nome, email, telefone e senha no backend.
+- Normalizar email.
+- Hash de senha com password_hash.
+- Criar user client.
+- Criar client_profile.
+- Criar communication_preferences.
+- Registrar consentimentos.
+- Registrar IP e user agent.
+- Aplicar rate limit.
+- Bloquear honeypot anti-spam.
+- Nao permitir criacao publica de admin.
+
+Fase 5.2 - Login
+- Validar CSRF.
+- Buscar usuario por email.
+- Verificar senha com password_verify.
+- Regenerar session_id ao logar.
+- Registrar login_logs.
+- Rate limit basico.
+- Resposta generica para falha.
+- Atualizar last_login_at apenas em sucesso.
+
+Fase 5.3 - Sessao segura
+- Regenerar session_id apos login.
+- Cookie HttpOnly.
+- Cookie Secure em producao.
+- SameSite=Lax.
+- Expiracao por inatividade.
+- Guardar somente resumo minimo na sessao.
+
+Fase 5.4 - Redirecionamento por perfil
+- client -> /cliente
+- employee/admin -> /app
+- admin_root -> /admin
+
+Fase 5.5 - Middleware de autenticacao e autorizacao
+- cliente exige user_type client.
+- app interno exige usuario interno/admin.
+- admin exige admin_root.
+- usuario suspenso/inativo nao acessa.
+
+Fase 5.6 - Recuperar senha
+- Token aleatorio.
+- Token hasheado no banco.
+- Expiracao curta.
+- Uso unico.
+- Nunca mostrar se email existe.
+
+Fase 5.7 - Alteracao de senha logado
+- Exigir senha atual.
+- Validar nova senha.
+- Hash com password_hash.
+- Regenerar sessao.
+- Revogar outras sessoes.
+- Registrar security_event.
+
+Fase 5.8 - Admin redefinindo acesso
+- Admin nao ve senha.
+- Admin gera link de redefinicao.
+- Link expira.
+- Link e uso unico.
+- A acao gera log.
+
+Fase 5.10 - Verificacao de email
+- Token forte.
+- Token hasheado.
+- Expiracao.
+- Reenvio com rate limit.
+- Middleware de email verificado preparado para acoes sensiveis.
+
+Fase 5.11 - 2FA/MFA
+- Tabela user_two_factor_settings criada.
+- Ativacao visual fica para pos-MVP, mas arquitetura ja tem ponto de extensao.
+
+Fase 5.12 - Logs
+- login_logs registra sucesso/falha.
+- security_events registra reset, troca de senha, logout, verificacao e comportamento suspeito.
+- user_sessions registra sessoes com hash.
+
+Fase 5.17 - Login com Google / OAuth
+- Google autentica identidade, nao permissao.
+- Cliente pode ser criado automaticamente apenas como client, se habilitado.
+- Funcionario/admin so loga se ja existir e estiver ativo.
+- Roles e permissoes continuam vindo do banco.
+
+Regra:
+Admin nunca ve senha. Sistema nunca salva senha em texto puro.
+
+MISSAO 6 - AREA DO CLIENTE MVP
+
+Objetivo:
+Cliente pedir projeto e acompanhar sem ver complexidade interna.
+
+Status:
+- Missao iniciada.
+- Entrada raiz criada em /index.php redirecionando para Cliente/index.php.
+- Layout proprio da area do cliente criado em src/View/layouts/client.php.
+- CSS proprio da area do cliente criado em Cliente/style/client.css.
+- Dashboard cliente conectado ao backend.
+- Novo pedido guiado criado com CSRF e persistencia em project_requests.
+- Meus projetos lista solicitacoes do proprio cliente.
+- Menu mobile inferior criado para a area cliente.
+- Pacotes Start/Core/Custom semeados no banco com versao atual.
+
+Fase 6.1 - Dashboard cliente
+- Projetos ativos.
+- Status atual.
+- Proxima etapa.
+- Pendencias.
+- Suportes abertos.
+- Mensalidade.
+- Ultimas mensagens.
+
+Fase 6.2 - Novo pedido
+- Escolher pacote.
+- Dados do negocio.
+- Objetivo.
+- Referencias.
+- Prazo desejado.
+- Arquivos.
+- Revisao.
+- Enviar.
+
+Fase 6.3 - Meus projetos
+- Lista de projetos.
+- Filtros simples.
+- Status.
+- Prazo.
+- Mensalidade.
+
+Fase 6.4 - Detalhe do projeto cliente
+Abas:
+- resumo
+- timeline
+- proposta/contrato
+- arquivos
+- mensagens
+- aprovacoes
+- suporte
+- pagamentos
+- reunioes
+
+Regra:
+Cliente nao ve:
+- comissao
+- taxa interna detalhada
+- chat interno
+- logs sensiveis
+- card interno nao liberado
+- problemas internos antes de comunicacao oficial
+
+MISSAO 7 - ADMIN SIMPLES
+
+Objetivo:
+Admin receber pedido, analisar e transformar em proposta/projeto.
+
+Fase 7.1 - Dashboard admin
+- Solicitacoes novas.
+- Projetos ativos.
+- Suportes abertos.
+- Atrasos.
+- Pendencias.
+
+Fase 7.2 - Solicitações
+- Ver pedido.
+- Analisar pacote.
+- Ajustar escopo.
+- Recusar.
+- Criar proposta.
+
+Fase 7.3 - Propostas
+- Criar proposta.
+- Enviar para cliente.
+- Registrar snapshot.
+- Aceite/recusa.
+
+Fase 7.4 - Criar projeto
+- Projeto nasce de proposta aceita.
+- Gravar agreed_*.
+- Gravar package_version.
+- Gravar promotion se houver.
+- Criar financial_event inicial.
+
+Regra:
+Projeto sem snapshot financeiro nao pode existir.
+
+MISSAO 8 - FINANCEIRO BLINDADO
+
+Objetivo:
+Evitar bug financeiro e conflito com cliente/funcionario.
+
+Fase 8.1 - Pacotes versionados
+- packages.
+- package_versions.
+- Nova alteracao de preco cria nova versao.
+- Nunca sobrescrever preco antigo.
+
+Fase 8.2 - Promocoes
+- promotions.
+- promotion_packages.
+- Preview antes de ativar.
+- Valida apenas novos pedidos.
+
+Fase 8.3 - Snapshot
+Pedido:
+- requested_base_value.
+- requested_discount_value.
+- requested_final_value.
+
+Proposta:
+- package_snapshot.
+- promotion_snapshot.
+- fee_snapshot.
+
+Projeto:
+- agreed_base_value.
+- agreed_discount_value.
+- agreed_final_value.
+- guildabyte_fee_value.
+- team_net_value.
+
+Fase 8.4 - Comissao
+- Valor aceito pelo funcionario vira snapshot.
+- Reducao exige log.
+- Quando afetar pagamento, exige aceite.
+
+Fase 8.5 - Eventos financeiros
+- financial_events para toda mudanca.
+- old_value/new_value em JSON.
+- motivo obrigatorio.
+- created_by obrigatorio em acao sensivel.
+
+Regra:
+Nunca recalcular projeto antigo pelo preco atual do pacote.
+
+MISSAO 9 - GUILDA BOARD
+
+Objetivo:
+Criar centro operacional interno.
+
+Fase 9.1 - Board por projeto
+- boards.
+- board_columns.
+- cards.
+
+Fase 9.2 - Cards completos
+- responsavel.
+- prioridade.
+- prazo.
+- checklist.
+- comentarios.
+- anexos.
+- bloqueio.
+- visibilidade cliente.
+
+Fase 9.3 - Templates
+- landing.
+- sistema core.
+- custom.
+- suporte.
+- manutencao.
+
+Fase 9.4 - Logs
+- card_activity_logs.
+- Quem mexeu.
+- Quando.
+- O que mudou.
+
+Regra:
+Board interno nao e a mesma coisa que timeline do cliente.
+
+MISSAO 10 - EQUIPE, CONVITES E COMISSOES
+
+Objetivo:
+Funcionario entrar em projeto com clareza e protecao.
+
+Fase 10.1 - Perfis internos
+- employee_profiles.
+- skills.
+- employee_skills.
+- disponibilidade.
+
+Fase 10.2 - Convites
+- project_invitations.
+- papel ofertado.
+- valor/percentual.
+- preview do calculo.
+- aceite/recusa.
+
+Fase 10.3 - Membros
+- project_members.
+- papel real.
+- valor aceito.
+- status.
+
+Fase 10.4 - Limites
+- max_active_projects.
+- ocupado bloqueia convite.
+- admin pode excecao com log.
+
+Regra:
+Funcionario nao pode perder valor combinado sem registro e regra clara.
+
+MISSAO 11 - SUPORTE E MANUTENCAO
+
+Objetivo:
+Separar projeto, manutencao, suporte, bug e feature.
+
+Fase 11.1 - Suporte cliente
+- abrir chamado.
+- meus chamados.
+- detalhe.
+- anexos.
+- avaliacao.
+
+Fase 11.2 - Interno suporte
+- triagem.
+- time original.
+- mural de manutencoes.
+- SLA.
+- responsavel.
+
+Fase 11.3 - Mensalidade
+- maintenance_monthly_usage.
+- limite 2 por mes.
+- suporte incluso.
+- suporte extra pago.
+
+Fase 11.4 - Funcionalidade extra
+- feature_requests.
+- orcamento.
+- aceite.
+- se passar limite, vira projeto novo.
+
+Regra:
+Incidente critico nao fica preso em fila de suporte comum.
+
+MISSAO 12 - RANKING E BONUS
+
+Objetivo:
+Gamificacao configuravel sem regra fixa no codigo.
+
+Fase 12.1 - Eventos
+- reward_events.
+- categoria.
+- periodo.
+- premio.
+- tipo meta/ranking.
+
+Fase 12.2 - Pontuacao
+- reward_scores.
+- nota media.
+- entregas elegiveis.
+- atrasos.
+- reaberturas.
+
+Fase 12.3 - Vencedores
+- reward_winners.
+- aprovado.
+- pago.
+- cancelado.
+
+Fase 12.4 - Tela funcionario
+- minha posicao.
+- top 5.
+- quanto falta.
+- historico.
+
+Regra:
+Ranking nao mostra dinheiro privado dos outros.
+
+MISSAO 13 - CONTRATOS, LGPD E AUDITORIA
+
+Objetivo:
+Blindar juridico, dados e acoes sensiveis.
+
+Fase 13.1 - Contratos
+- modelos versionados.
+- aceite digital.
+- snapshot de conteudo.
+- hash.
+- IP/user agent.
+
+Fase 13.2 - Aditivos
+- scope_addendums.
+- valor adicional.
+- prazo adicional.
+- novo aceite.
+
+Fase 13.3 - LGPD
+- privacy_consents.
+- communication_preferences.
+- data_subject_requests.
+- data_processing_records.
+
+Fase 13.4 - Auditoria
+- audit_logs.
+- login_logs.
+- security_events.
+- user_sessions.
+
+Regra:
+Acao sensivel sem log e bug.
+
+MISSAO 14 - INCIDENTES
+
+Objetivo:
+Separar problema grave de suporte normal.
+
+Fase 14.1 - Criar incidente
+- site fora do ar.
+- vazamento.
+- pagamento com erro.
+- invasao.
+- login comprometido.
+- backup falhou.
+
+Fase 14.2 - Fluxo
+- aberto.
+- contencao.
+- investigacao.
+- resolvido.
+- relatorio emitido.
+- encerrado.
+
+Fase 14.3 - Notificacao
+- Admin/Admin Root recebem prioridade.
+- Cliente so ve comunicacao aprovada.
+
+Regra:
+Incidente critico pula fila.
+
+MISSAO 15 - INTEGRACOES EXTERNAS
+
+Objetivo:
+Adicionar servicos sem acoplar no controller.
+
+Fase 15.1 - Email
+- interface Mailer.
+- implementacao SMTP.
+- templates.
+
+Fase 15.2 - WhatsApp
+- interface WhatsAppClient.
+- provider configuravel.
+- logs de envio.
+
+Fase 15.3 - Mercado Pago
+- interface PaymentGateway.
+- webhook validado.
+- idempotencia.
+- conferir valor no backend.
+
+Fase 15.4 - Reunioes
+- Jitsi/Meet.
+- project_rooms.
+- meeting_notes.
+
+Regra:
+Controller nunca chama API externa direto.
+
+ORDEM FINAL PARA NAO QUEBRAR
+
+1. Missao 1 - Git/env blindado.
+2. Missao 2 - Base atual organizada.
+3. Missao 3 - Design system e layouts.
+4. Missao 4 - Config/banco.
+5. Missao 5 - Auth.
+6. Missao 6 - Cliente MVP.
+7. Missao 7 - Admin simples.
+8. Missao 8 - Financeiro blindado.
+9. Missao 9 - Guilda Board.
+10. Missao 10 - Equipe/convites.
+11. Missao 11 - Suporte/manutencao.
+12. Missao 12 - Ranking/bonus.
+13. Missao 13 - Contratos/LGPD/auditoria.
+14. Missao 14 - Incidentes.
+15. Missao 15 - Integracoes.
+
+CHECKLIST DE SEGURANCA POR FEATURE
+
+Antes de considerar uma feature pronta:
+- Validacao no backend.
+- CSRF onde tiver formulario.
+- Permissao no backend.
+- Prepared statement/ORM.
+- Escape no output HTML.
+- Log se for acao sensivel.
+- Nenhum segredo no JS.
+- Nenhum valor financeiro confiando no front.
+- Estado vazio/loading/erro.
+- Teste manual do fluxo feliz.
+- Teste manual de tentativa invalida.
+
+FRASE OFICIAL
+
+Front-end encanta.
+Backend decide.
+Banco registra.
+Auditoria prova.
