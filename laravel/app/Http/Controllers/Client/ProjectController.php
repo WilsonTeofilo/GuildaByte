@@ -3,35 +3,34 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controller limpo de projetos do cliente.
+ * Usa Route Model Binding com scope de ownership automático.
+ */
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the client's projects.
-     */
-    public function index(): View
+    public function index(Request $request): View
     {
-        // Pega os projetos do cliente autenticado
-        // 'with' para evitar N+1
-        $projects = Auth::user()->clientProjects()
-            ->with(['packageVersion', 'status'])
-            ->orderBy('created_at', 'desc')
+        $projects = $request->user()
+            ->clientProjects()
+            ->active()                        // scope: exclui cancelled/archived
+            ->with('packageVersion')
+            ->latest('updated_at')
             ->get();
 
         return view('client.projects.index', compact('projects'));
     }
 
-    /**
-     * Display the specific project details.
-     */
-    public function show(string $id): View
+    public function show(Request $request, Project $project): View
     {
-        $project = Auth::user()->clientProjects()
-            ->with(['packageVersion', 'status', 'addendums', 'messages'])
-            ->findOrFail($id);
+        // Garante que o projeto pertence ao cliente (autorização no servidor)
+        abort_unless($project->client_id === $request->user()->id, 403);
+
+        $project->load(['packageVersion', 'contractAcceptances', 'scopeAddendums']);
 
         return view('client.projects.show', compact('project'));
     }

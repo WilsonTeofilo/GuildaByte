@@ -82,6 +82,22 @@ class Project extends Model
         return $this->hasMany(SupportTicket::class);
     }
 
+    public function contractAcceptances()
+    {
+        return $this->hasMany(\App\Models\ContractAcceptance::class);
+    }
+
+    public function scopeAddendums()
+    {
+        return $this->hasMany(\App\Models\ScopeAddendum::class);
+    }
+
+    /** Scopes de status como strings (campo enum/string no banco) */
+    public function scopeActive($query)
+    {
+        return $query->whereNotIn('status', ['cancelled', 'archived']);
+    }
+
     // ── Boot ─────────────────────────────────────────────────────
 
     protected static function booted(): void

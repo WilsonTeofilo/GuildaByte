@@ -57,6 +57,12 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Project::class, 'client_id');
     }
 
+    /** Alias semântico para controllers de cliente */
+    public function clientProjects()
+    {
+        return $this->projects();
+    }
+
     public function payments()
     {
         return $this->hasMany(\App\Models\Payment::class, 'client_id');
