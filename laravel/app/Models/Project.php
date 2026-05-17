@@ -60,40 +60,7 @@ class Project extends Model
         return $this->belongsTo(User::class, 'client_id');
     }
 
-    public function packageVersion()
-    {
-        return $this->belongsTo(PackageVersion::class);
-    }
-
-    public function financialEvents()
-    {
-        return $this->hasMany(FinancialEvent::class);
-    }
-
-    public function board()
-    {
-        return $this->hasOne(Board::class);
-    }
-
-    public function members()
-    {
-        return $this->hasMany(ProjectMember::class);
-    }
-
-    public function supportTickets()
-    {
-        return $this->hasMany(SupportTicket::class);
-    }
-
-    public function contractAcceptances()
-    {
-        return $this->hasMany(ContractAcceptance::class);
-    }
-
-    public function addendums()
-    {
-        return $this->hasMany(ScopeAddendum::class);
-    }
+    // Métodos packageVersion, financialEvents, board, members, contractAcceptances, addendums removidos (Clean Architecture - módulos não construídos ainda)
 
     /** Percentual de progresso do projeto baseado no status */
     public function getProgressPercentAttribute(): int

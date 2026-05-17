@@ -11,11 +11,10 @@ class ClientController extends Controller
     {
         $user = Auth::user()->load('clientProfile');
 
-        // Carrega projetos, faturas e tickets em uma única query (anti N+1)
+        // Carrega projetos em uma única query otimizada
         $projects = $user
             ->clientProjects()
             ->active()
-            ->with('packageVersion')
             ->latest('updated_at')
             ->get();
 

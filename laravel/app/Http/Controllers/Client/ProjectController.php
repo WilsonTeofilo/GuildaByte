@@ -18,7 +18,6 @@ class ProjectController extends Controller
         $projects = $request->user()
             ->clientProjects()
             ->active()                        // scope: exclui cancelled/archived
-            ->with('packageVersion')
             ->latest('updated_at')
             ->get();
 
@@ -30,7 +29,7 @@ class ProjectController extends Controller
         // Garante que o projeto pertence ao cliente (autorização no servidor)
         abort_unless($project->client_id === $request->user()->id, 403);
 
-        $project->load(['packageVersion', 'contractAcceptances', 'scopeAddendums']);
+        // Models não essenciais ou não criados foram removidos do load para evitar Crash
 
         return view('client.projects.show', compact('project'));
     }
