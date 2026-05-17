@@ -83,8 +83,8 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                 Meus Projetos
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-[#aaa4bc] hover:bg-white/5 hover:text-white font-bold transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            <a href="{{ route('client.wizard') }}" class="flex items-center gap-3 p-3 rounded-xl {{ request()->routeIs('client.wizard') ? 'bg-[#7f77dd]/20 text-[#afa9ec] border border-[#7f77dd]/30' : 'text-[#aaa4bc] hover:bg-white/5 hover:text-white' }} font-bold transition-colors">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 Novo Pedido
             </a>
             <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-[#aaa4bc] hover:bg-white/5 hover:text-white font-bold transition-colors">
