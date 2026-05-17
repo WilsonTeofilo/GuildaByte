@@ -2,6 +2,10 @@
 
 @section('title', 'Meu Perfil')
 
+@push('styles')
+    @vite(['resources/css/profile.css'])
+@endpush
+
 @section('content')
 
 <div class="profile-header">

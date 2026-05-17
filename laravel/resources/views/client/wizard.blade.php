@@ -3,7 +3,7 @@
 @section('title', 'Novo Pedido | GuildaByte')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('style/client.css') }}?v=1.1">
+    @vite(['resources/css/wizard.css'])
 @endpush
 
 @section('content')
