@@ -65,7 +65,11 @@
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="GuildaByte inicio">
-      <img class="brand-avatar" src="{{ asset('assets/HeaderTrans.png') }}" alt="" aria-hidden="true">
+      <img class="brand-avatar"
+           src="{{ asset('assets/HeaderTrans.png') }}"
+           alt=""
+           aria-hidden="true"
+           width="40" height="40">
       <span class="brand-name">Guilda<span>Byte</span></span>
     </a>
 
@@ -179,7 +183,12 @@
       <div class="feature-grid">
         @foreach($features as $feature)
           <article class="feature-card">
-            <img class="pixel-asset" src="{{ asset('assets/' . $feature['icon']) }}" alt="" aria-hidden="true">
+            <img class="pixel-asset"
+                 src="{{ asset('assets/' . $feature['icon']) }}"
+                 alt="Ícone: {{ $feature['title'] }}"
+                 width="48" height="48"
+                 loading="lazy"
+                 decoding="async">
             <h3>{{ $feature['title'] }}</h3>
             <p>{{ $feature['text'] }}</p>
           </article>
@@ -196,7 +205,11 @@
       <div class="niche-grid">
         @foreach($niches as $niche)
           <article class="niche-card">
-            <img src="{{ asset('assets/' . $niche['icon']) }}" alt="" aria-hidden="true">
+            <img src="{{ asset('assets/' . $niche['icon']) }}"
+                 alt="Criação de site e sistema para {{ $niche['title'] }}"
+                 width="40" height="40"
+                 loading="lazy"
+                 decoding="async">
             <strong>{{ $niche['title'] }}</strong>
             <p>{{ $niche['text'] }}</p>
           </article>

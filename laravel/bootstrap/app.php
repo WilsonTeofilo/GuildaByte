@@ -15,8 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role'    => \App\Http\Middleware\RoleMiddleware::class,
             'webhook' => \App\Http\Middleware\VerifyWebhookSignature::class,
         ]);
-        
+
+        // SecurityHeaders em todas as respostas HTTP
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+        // Log de falha de login em todas as respostas HTTP
+        $middleware->append(\App\Http\Middleware\LogFailedLogin::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
