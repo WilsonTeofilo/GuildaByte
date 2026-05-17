@@ -41,7 +41,7 @@ class SendOtpAction
             'expires_at' => now()->addMinutes(3),
         ]);
 
-        // Dispara email
-        Mail::to($email)->queue(new SendOtpMail($code, 3));
+        // Dispara email de forma síncrona (não depende de fila)
+        Mail::to($email)->send(new SendOtpMail($code, 3));
     }
 }

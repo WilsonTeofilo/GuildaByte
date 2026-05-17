@@ -88,7 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const otpError  = document.getElementById('otpError');
         const sendUrl   = formOtp.dataset.sendUrl;
         const verifyUrl = formOtp.dataset.verifyUrl;
-        const csrfToken = () => document.querySelector('input[name="_token"]')?.value || '';
+        // CSRF: lê da meta tag (mais confiável que o input que some quando form está oculto)
+        const csrfToken = () =>
+            document.querySelector('meta[name="csrf-token"]')?.content ||
+            document.querySelector('input[name="_token"]')?.value || '';
 
         btnSend?.addEventListener('click', async () => {
             const email = emailInp?.value?.trim();

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | GuildaByte</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pixelify+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -120,7 +121,7 @@
 
         <div class="links-row">
           <a class="px-link" href="{{ route('register') }}">&#9654; CRIAR CONTA</a>
-          <a class="px-link" href="#">&#9654; ESQUECI A SENHA</a>
+          <a class="px-link" href="{{ route('password.request') }}">&#9654; ESQUECI A SENHA</a>
         </div>
       </div>
     </section>
