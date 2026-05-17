@@ -87,7 +87,7 @@ class Project extends Model
         return $this->hasMany(\App\Models\ContractAcceptance::class);
     }
 
-    public function scopeAddendums()
+    public function addendums()
     {
         return $this->hasMany(\App\Models\ScopeAddendum::class);
     }
