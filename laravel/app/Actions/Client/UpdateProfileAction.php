@@ -14,7 +14,7 @@ final class UpdateProfileAction
     public static function run(Request $request): ClientProfile
     {
         $data = $request->validate([
-            'phone'               => ['nullable', 'string', 'max:20'],
+            'phone'               => ['nullable', 'string', 'max:20', 'regex:/^[\d\+\-\(\) ]{10,20}$/'],
             'business_type'       => ['nullable', 'string', 'max:100'],
             'business_name'       => ['nullable', 'string', 'max:100'],
             'instagram'           => ['nullable', 'string', 'max:100'],

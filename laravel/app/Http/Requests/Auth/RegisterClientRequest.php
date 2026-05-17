@@ -16,8 +16,8 @@ class RegisterClientRequest extends FormRequest
         return [
             'name'          => ['required', 'string', 'min:2', 'max:255'],
             'email'         => ['required', 'email:rfc', 'unique:users,email', 'max:255'],
-            'password'      => ['required', 'min:8', 'confirmed'],
-            'phone'         => ['nullable', 'string', 'max:20'],
+            'password'      => ['required', 'min:8', 'confirmed', \Illuminate\Validation\Rules\Password::min(8)->letters()->mixedCase()->numbers()],
+            'phone'         => ['nullable', 'string', 'max:20', 'regex:/^[\d\+\-\(\) ]{10,20}$/'],
             'business_type' => ['nullable', 'string', 'max:100'],
             'business_name' => ['nullable', 'string', 'max:255'],
         ];
@@ -33,6 +33,10 @@ class RegisterClientRequest extends FormRequest
             'password.required' => 'Crie uma senha de acesso.',
             'password.min'      => 'A senha deve ter no mínimo 8 caracteres.',
             'password.confirmed'=> 'As senhas não conferem.',
+            'password.mixed'    => 'A senha deve conter letras maiúsculas e minúsculas.',
+            'password.numbers'  => 'A senha deve conter pelo menos um número.',
+            'phone.max'         => 'O telefone não pode ter mais que 20 caracteres.',
+            'phone.regex'       => 'O formato do telefone é inválido.',
         ];
     }
 
