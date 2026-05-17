@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 86px;
+  min-height: 98px;
   margin: 0;
   padding: 0 clamp(20px, 4vw, 54px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -27,8 +27,8 @@
 
 .brand-avatar {
   display: block;
-  width: 78px;
-  height: 78px;
+  width: 90px;
+  height: 90px;
   flex: 0 0 auto;
   object-fit: contain;
   image-rendering: pixelated;
@@ -38,7 +38,7 @@
 .brand-name {
   color: var(--text);
   font-family: "Pixelify Sans", Inter, sans-serif;
-  font-size: 26px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1;
 }

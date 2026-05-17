@@ -92,6 +92,22 @@ class Project extends Model
         return $this->hasMany(\App\Models\ScopeAddendum::class);
     }
 
+    /** Percentual de progresso do projeto baseado no status */
+    public function getProgressPercentAttribute(): int
+    {
+        return match($this->status) {
+            'received'           => 10,
+            'in_analysis'        => 20,
+            'proposal_sent'      => 30,
+            'awaiting_approval'  => 40,
+            'in_development'     => 65,
+            'in_review'          => 80,
+            'delivered'          => 90,
+            'maintenance'        => 100,
+            default              => 0,
+        };
+    }
+
     /** Scopes de status como strings (campo enum/string no banco) */
     public function scopeActive($query)
     {
